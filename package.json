@@ -1,10 +1,10 @@
 {
-  "name": "mi-web",
+  "name": "miroc-srl",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "npm i --no-audit --no-found && vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
