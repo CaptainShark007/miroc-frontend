@@ -9,6 +9,7 @@ import { ErrorBoundary } from '@components/ErrorBoundary';
 import ErrorFallback from '@components/ErrorFallback';
 import LazyFallback from '@components/LazyFallback';
 import { theme } from '@/shared/constants/theme';
+import { ToastProvider } from '@/shared/providers/ToastProvider';
 
 export default function App() {
   return (
@@ -18,9 +19,11 @@ export default function App() {
         <Suspense fallback={<LazyFallback />}>
           <Provider store={store}>
             <QueryClientProvider client={new QueryClient()}>
-              <BrowserRouter>
-                <Router />
-              </BrowserRouter>
+              <ToastProvider>
+                <BrowserRouter>
+                  <Router />
+                </BrowserRouter>
+              </ToastProvider>
             </QueryClientProvider>
           </Provider>
         </Suspense>
