@@ -1,4 +1,26 @@
 import { lazy } from 'react';
 
-//pages
 export const LoginPage = lazy(() => import('@/features/auth/pages/LoginPage'));
+export const DashboardPage = lazy(
+  () => import('@/features/dashboard/pages/DashboardPage')
+);
+export const ConfigurationPage = lazy(
+  () => import('@/features/configuration/pages/ConfigurationPage')
+);
+export const ClientPage = lazy(
+  () => import('@/features/client/pages/ClientPage')
+);
+export const ProviderPage = lazy(
+  () => import('@/features/provider/pages/ProviderPage')
+);
+export const EmployeePage = lazy(
+  () => import('@/features/employee/pages/EmployeePage')
+);
+export const BoxPage = lazy(() => import('@/features/box/pages/BoxPage'));
+export const ConstructionPage = lazy(
+  () => import('@/features/construction/pages/ConstructionPage')
+);
+export const ReportsPage = lazy(
+  () => import('@/features/reports/pages/ReportsPage')
+);
+export const StockPage = lazy(() => import('@/features/stock/pages/StockPage'));
