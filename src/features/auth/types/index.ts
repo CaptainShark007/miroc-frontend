@@ -1,8 +1,5 @@
 export type AuthState = {
   token: string | null;
-  username: string | null;
-  idUser: string | null;
-  rol: 'ADMIN' | 'PROFESSIONAL' | 'CUSTOMER' | 'DEVELOPER' | null;
 };
 
 export type JwtPayload = {
@@ -21,5 +18,11 @@ export type AuthRequest = {
 };
 
 export type AuthResponse = {
-  token: string;
+  data: {
+    accessToken: string;
+    refreshToken: string;
+  };
+  message: string;
+  status: number;
+  isSuccess: boolean;
 };

@@ -10,9 +10,6 @@ const loadStateFromStorage = (): AuthState => {
       const auth = JSON.parse(authJson);
       return {
         token: auth.token,
-        username: auth.username,
-        idUser: auth.idUser,
-        rol: auth.rol,
       };
     }
   } catch (error) {
@@ -24,9 +21,6 @@ const loadStateFromStorage = (): AuthState => {
 
   return {
     token: null,
-    idUser: null,
-    username: null,
-    rol: null,
   };
 };
 
@@ -38,18 +32,12 @@ const authSlice = createSlice({
   reducers: {
     setToken(state, action: PayloadAction<AuthState>) {
       state.token = action.payload.token;
-      state.username = action.payload.username;
-      state.idUser = action.payload.idUser;
-      state.rol = action.payload.rol;
       if (action.payload.token) {
         localStorage.setItem(STORAGE_KEYS.AUTH, JSON.stringify(action.payload));
       }
     },
     clearToken(state) {
       state.token = null;
-      state.idUser = null;
-      state.username = null;
-      state.rol = null;
       localStorage.removeItem(STORAGE_KEYS.AUTH);
     },
   },
