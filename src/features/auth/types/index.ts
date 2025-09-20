@@ -8,8 +8,9 @@ export type JwtPayload = {
   exp: number;
   iat?: number;
   iss?: string;
-  rol?: 'ADMIN' | 'PROFESSIONAL' | 'CUSTOMER' | 'DEVELOPER';
+  role?: 'ADMIN' | 'PRESUPUESTISTA';
   username?: string;
+  permissions?: string[];
 };
 
 export type AuthRequest = {
