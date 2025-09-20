@@ -7,6 +7,15 @@ export const DashboardPage = lazy(
 export const ConfigurationPage = lazy(
   () => import('@/features/configuration/pages/ConfigurationPage')
 );
+export const UserAdminPage = lazy(
+  () => import('@/features/admin/pages/UserAdminPage')
+);
+export const CreateUserPage = lazy(
+  () => import('@/features/admin/pages/CreateUserPage')
+);
+export const EditUserPage = lazy(
+  () => import('@/features/admin/pages/EditUserPage')
+);
 export const ClientPage = lazy(
   () => import('@/features/client/pages/ClientPage')
 );

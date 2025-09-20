@@ -55,6 +55,7 @@ export interface HttpClient {
   get<T>(url: string): Promise<T>;
   post<T>(url: string, data?: any): Promise<T>;
   put<T>(url: string, data?: any): Promise<T>;
+  patch<T>(url: string, data?: any): Promise<T>;
   delete<T>(url: string): Promise<T>;
 }
 
@@ -62,6 +63,7 @@ const AxiosClient: HttpClient = {
   get: (url) => axiosInstance.get(url).then((res) => res.data),
   post: (url, data) => axiosInstance.post(url, data).then((res) => res.data),
   put: (url, data) => axiosInstance.put(url, data).then((res) => res.data),
+  patch: (url, data) => axiosInstance.patch(url, data).then((res) => res.data),
   delete: (url) => axiosInstance.delete(url).then((res) => res.data),
 };
 
