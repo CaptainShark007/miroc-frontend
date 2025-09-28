@@ -10,15 +10,15 @@ export const useDeleteUser = () => {
 
   return useMutation<DeleteUserResponse, ErrorResponse, number>({
     mutationFn: (userId: number) => deleteUser(userId),
-    onSuccess: (data) => {
+    onSuccess: (res) => {
       queryClient.invalidateQueries({ queryKey: ['users'] });
       showToast(
-        `Usuario ${data.data.firstName} ${data.data.lastName} eliminado exitosamente`,
+        `Usuario ${res.data.firstName} ${res.data.lastName} eliminado exitosamente`,
         'success'
       );
     },
-    onError: (error) => {
-      showToast(`Error al eliminar usuario: ${error.message}`, 'error');
+    onError: (res) => {
+      showToast(`Error al eliminar usuario: ${res.error.message}`, 'error');
     },
   });
 };
