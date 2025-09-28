@@ -1,4 +1,4 @@
-import { Permission as APIPermission } from '@/features/admin/types';
+import { Permission as APIPermission } from '@features/admin/types';
 
 export interface UIPermission {
   id: string;

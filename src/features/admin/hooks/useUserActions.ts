@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { User } from '@/features/admin/types';
-import { useToast } from '@/shared/hooks/useToast';
+import { User } from '@features/admin/types';
+import { useToast } from '@shared/hooks/useToast';
 import { useDeleteUser } from './useDeleteUser';
 
 interface UseUserActionsReturn {
@@ -54,7 +54,7 @@ export const useUserActions = (): UseUserActionsReturn => {
 
   const handleConfirmDelete = () => {
     if (deleteDialog.user) {
-      deleteUserMutation.mutate(deleteDialog.user.id, {
+      deleteUserMutation.mutate(deleteDialog.user.dni, {
         onSuccess: () => {
           setDeleteDialog({ open: false, user: null });
         },

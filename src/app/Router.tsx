@@ -15,12 +15,12 @@ import {
   CreateProviderPage,
   EditProviderPage
 } from '@app/lazy';
-import { Error404 } from '@/shared/components/Error404';
+import { Error404 } from '@shared/components/Error404';
 import { Route, Routes } from 'react-router';
-import DashboardLayout from '@/layout/DashboardLayout';
-import ProtectedRoute from '@/shared/components/ProtectedRoute';
-import PublicRoute from '@/shared/components/PublicRoute';
-import AdminRoute from '@/shared/components/AdminRoute';
+import DashboardLayout from '@layout/DashboardLayout';
+import ProtectedRoute from '@shared/components/ProtectedRoute';
+import PublicRoute from '@shared/components/PublicRoute';
+import AdminRoute from '@shared/components/AdminRoute';
 
 export default function Router() {
   return (

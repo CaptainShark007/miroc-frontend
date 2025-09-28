@@ -1,6 +1,6 @@
 import { TableCell, Chip } from '@mui/material';
-import { User } from '@/features/admin/types';
-import { formatDNI } from '@/shared/utils/formatters';
+import { User } from '@features/admin/types';
+import { formatDNI } from '@shared/utils/formatters';
 import UserActions from './UserActions';
 
 interface UserTableRowProps {

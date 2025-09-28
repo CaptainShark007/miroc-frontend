@@ -5,11 +5,11 @@ import { BrowserRouter } from 'react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Suspense } from 'react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import { ErrorBoundary } from '@components/ErrorBoundary';
-import ErrorFallback from '@components/ErrorFallback';
-import LazyFallback from '@components/LazyFallback';
-import { theme } from '@/shared/constants/theme';
-import { ToastProvider } from '@/shared/providers/ToastProvider';
+import { ErrorBoundary } from '@shared/components/ErrorBoundary';
+import ErrorFallback from '@shared/components/ErrorFallback';
+import LazyFallback from '@shared/components/LazyFallback';
+import { theme } from '@shared/constants/theme';
+import { ToastProvider } from '@shared/providers/ToastProvider';
 
 export default function App() {
   return (

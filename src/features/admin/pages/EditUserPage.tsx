@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Paper, Typography } from '@mui/material';
-import { useFormWithSchema } from '@/shared/hooks/useFormWithSchema';
+import { useFormWithSchema } from '@shared/hooks/useFormWithSchema';
 import {
   editUserSchema,
   EditUserFormData,
-} from '@/features/admin/schemas/editUserSchema';
-import { useUpdateUser } from '@/features/admin/hooks/useUpdateUser';
-import { useUserById } from '@/features/admin/hooks/useUserById';
-import EditUserHeader from '@/features/admin/components/EditUserHeader';
-import EditUserFormFields from '@/features/admin/components/EditUserFormFields';
-import EditUserActions from '@/features/admin/components/EditUserActions';
-import { useToast } from '@/shared/hooks/useToast';
+} from '@features/admin/schemas/editUserSchema';
+import { useUpdateUser } from '@features/admin/hooks/useUpdateUser';
+import { useUserById } from '@features/admin/hooks/useUserById';
+import EditUserHeader from '@features/admin/components/EditUserHeader';
+import EditUserFormFields from '@features/admin/components/EditUserFormFields';
+import EditUserActions from '@features/admin/components/EditUserActions';
+import { useToast } from '@shared/hooks/useToast';
 
 export default function EditUserPage() {
   const navigate = useNavigate();

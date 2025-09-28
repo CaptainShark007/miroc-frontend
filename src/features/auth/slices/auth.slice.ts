@@ -1,4 +1,4 @@
-import { STORAGE_KEYS } from '@/shared/constants/redux';
+import { STORAGE_KEYS } from '@shared/constants/redux';
 import { AuthState } from '@features/auth/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 

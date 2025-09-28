@@ -8,7 +8,7 @@ import {
   CircularProgress,
   Typography,
 } from '@mui/material';
-import { User } from '@/features/admin/types';
+import { User } from '@features/admin/types';
 import UserTableRow from './UserTableRow';
 
 interface UsersTableProps {

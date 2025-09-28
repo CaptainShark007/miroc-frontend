@@ -1,8 +1,8 @@
 import { Box, Link, Stack } from '@mui/material';
-import { LoadingButton } from '@/shared/components/LoadingButton';
-import { FormTextField } from '@/shared/components/FormTextField';
-import { FormPasswordField } from '@/shared/components/FormPasswordField';
-import { useFormWithSchema } from '@/shared/hooks/useFormWithSchema';
+import { LoadingButton } from '@shared/components/LoadingButton';
+import { FormTextField } from '@shared/components/FormTextField';
+import { FormPasswordField } from '@shared/components/FormPasswordField';
+import { useFormWithSchema } from '@shared/hooks/useFormWithSchema';
 import { loginSchema, LoginFormData } from '../schemas/loginSchema';
 
 interface LoginFormProps {

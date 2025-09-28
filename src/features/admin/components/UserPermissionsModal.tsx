@@ -27,15 +27,16 @@ import {
   Groups,
   Save,
 } from '@mui/icons-material';
-import { useRoles } from '@/features/admin/hooks/useRoles';
-import { useUpdateRole } from '@/features/admin/hooks/useUpdateRole';
+import { useRoles } from '@features/admin/hooks/useRoles';
+import { useUpdateRole } from '@features/admin/hooks/useUpdateRole';
 import {
   convertAPIRoleToFrontend,
   convertPermissionChangesToAPI,
   UIRole,
   UIModule,
-} from '@/features/admin/utils/permissionsMapper';
-import { Permission as APIPermission } from '@/features/admin/types';
+} from '@features/admin/utils/permissionsMapper';
+import { Permission as APIPermission } from '@features/admin/types';
+import { useAuth } from '@shared/hooks/useAuth';
 
 interface UserPermissionsModalProps {
   open: boolean;
@@ -57,12 +58,13 @@ export default function UserPermissionsModal({
   open,
   onClose,
 }: UserPermissionsModalProps) {
+  const { isAdmin } = useAuth();
   const [expandedRole, setExpandedRole] = useState<string | false>(false);
   const [pendingChanges, setPendingChanges] = useState<
     Record<string, PermissionChange[]>
   >({});
 
-  const { data: rolesData, isLoading, error } = useRoles();
+  const { data: rolesData, isLoading, error } = useRoles(isAdmin());
   const updateRoleMutation = useUpdateRole();
 
   const roles: UIRole[] = rolesData?.data

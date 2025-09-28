@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
-import { LoadingButton } from '@/shared/components/LoadingButton';
+import { LoadingButton } from '@shared/components/LoadingButton';
 
 interface EditUserActionsProps {
   onCancel: () => void;

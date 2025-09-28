@@ -1,31 +1,32 @@
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '@/app/store';
+import { useAppDispatch } from '@app/store';
 import { setToken } from '../slices/auth.slice';
 import { login } from '../api/service';
-import { useToast } from '@/shared/hooks/useToast';
+import { useToast } from '@shared/hooks/useToast';
 import { AuthRequest, AuthResponse } from '../types';
 import { useMutation } from '@tanstack/react-query';
+import { ErrorResponse } from '@shared/types/errorResponse';
 
 export const useLogin = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { showSuccess, showError } = useToast();
 
-  return useMutation<AuthResponse, Error, AuthRequest>({
+  return useMutation<AuthResponse, ErrorResponse, AuthRequest>({
     mutationFn: login,
-    onSuccess: (response) => {
+    onSuccess: (res) => {
       dispatch(
         setToken({
-          token: response.data.accessToken,
+          token: res.data.accessToken,
         })
       );
 
-      showSuccess(response.message ?? '¡Inicio de sesión exitoso! Bienvenido.');
+      showSuccess(res.message ?? '¡Inicio de sesión exitoso! Bienvenido.');
 
       navigate('/dashboard');
     },
-    onError: (error: any) => {
-      showError(error.message);
+    onError: (res) => {
+      showError(res.error.message);
     },
   });
 };

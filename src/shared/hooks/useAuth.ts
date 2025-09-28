@@ -1,6 +1,6 @@
-import { useAppSelector } from '@/app/store';
-import { decodeJWT } from '@/shared/utils/jwt';
-import { JwtPayload } from '@/features/auth/types';
+import { useAppSelector } from '@app/store';
+import { decodeJWT } from '@shared/utils/jwt';
+import { JwtPayload } from '@features/auth/types';
 
 export const useAuth = () => {
   const token = useAppSelector((state) => state.auth.token);

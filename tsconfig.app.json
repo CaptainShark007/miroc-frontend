@@ -25,16 +25,11 @@
     /* References */
     "baseUrl": "./src/",
     "paths": {
-      "@components/*": ["./shared/components/*"],
-      "@hooks/*": ["./shared/hooks/*"],
-      "@types/*": ["./shared/types/*"],
-      "@utils/*": ["./shared/utils/*"],
       "@app/*": ["./app/*"],
       "@assets/*": ["./assets/*"],
-      "@constants/*": ["./constants/*"],
       "@features/*": ["./features/*"],
       "@layout/*": ["./layout/*"],
-      "@screens/*": ["./screens/*"],
+      "@shared/*": ["./shared/*"],
       "@/*": ["./*"]
     }
   },

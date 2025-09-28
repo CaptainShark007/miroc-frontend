@@ -1,26 +1,26 @@
 import { lazy } from 'react';
 
-export const LoginPage = lazy(() => import('@/features/auth/pages/LoginPage'));
+export const LoginPage = lazy(() => import('@features/auth/pages/LoginPage'));
 export const DashboardPage = lazy(
-  () => import('@/features/dashboard/pages/DashboardPage')
+  () => import('@features/dashboard/pages/DashboardPage')
 );
 export const ConfigurationPage = lazy(
-  () => import('@/features/configuration/pages/ConfigurationPage')
+  () => import('@features/configuration/pages/ConfigurationPage')
 );
 export const UserAdminPage = lazy(
-  () => import('@/features/admin/pages/UserAdminPage')
+  () => import('@features/admin/pages/UserAdminPage')
 );
 export const CreateUserPage = lazy(
-  () => import('@/features/admin/pages/CreateUserPage')
+  () => import('@features/admin/pages/CreateUserPage')
 );
 export const EditUserPage = lazy(
-  () => import('@/features/admin/pages/EditUserPage')
+  () => import('@features/admin/pages/EditUserPage')
 );
 export const ClientPage = lazy(
-  () => import('@/features/client/pages/ClientPage')
+  () => import('@features/client/pages/ClientPage')
 );
 export const ProviderPage = lazy(
-  () => import('@/features/provider/pages/ProviderPage')
+  () => import('@features/provider/pages/ProviderPage')
 );
 export const CreateProviderPage = lazy(
   () => import('@/features/provider/pages/CreateProviderPage')
@@ -29,13 +29,13 @@ export const EditProviderPage = lazy(
   () => import('@/features/provider/pages/EditProviderPage')
 );
 export const EmployeePage = lazy(
-  () => import('@/features/employee/pages/EmployeePage')
+  () => import('@features/employee/pages/EmployeePage')
 );
-export const BoxPage = lazy(() => import('@/features/box/pages/BoxPage'));
+export const BoxPage = lazy(() => import('@features/box/pages/BoxPage'));
 export const ConstructionPage = lazy(
-  () => import('@/features/construction/pages/ConstructionPage')
+  () => import('@features/construction/pages/ConstructionPage')
 );
 export const ReportsPage = lazy(
-  () => import('@/features/reports/pages/ReportsPage')
+  () => import('@features/reports/pages/ReportsPage')
 );
-export const StockPage = lazy(() => import('@/features/stock/pages/StockPage'));
+export const StockPage = lazy(() => import('@features/stock/pages/StockPage'));

@@ -1,8 +1,8 @@
 import { Control } from 'react-hook-form';
-import { FormTextField } from '@/shared/components/FormTextField';
-import { FormPasswordField } from '@/shared/components/FormPasswordField';
-import { FormSelectField } from '@/shared/components/FormSelectField';
-import { CreateUserFormData } from '@/features/admin/schemas/createUserSchema';
+import { FormTextField } from '@shared/components/FormTextField';
+import { FormPasswordField } from '@shared/components/FormPasswordField';
+import { FormSelectField } from '@shared/components/FormSelectField';
+import { CreateUserFormData } from '@features/admin/schemas/createUserSchema';
 
 interface CreateUserFormFieldsProps {
   control: Control<CreateUserFormData>;

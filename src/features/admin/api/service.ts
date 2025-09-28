@@ -1,4 +1,4 @@
-import AxiosClient from '@/app/axios';
+import AxiosClient from '@app/axios';
 import {
   CreateUserRequest,
   CreateUserResponse,
@@ -56,7 +56,7 @@ export const updateUser = async (
   userId: number,
   data: UpdateUserRequest
 ): Promise<UpdateUserResponse> => {
-  const response = await AxiosClient.put<UpdateUserResponse>(
+  const response = await AxiosClient.patch<UpdateUserResponse>(
     `/api/v1/users/${userId}`,
     data
   );
