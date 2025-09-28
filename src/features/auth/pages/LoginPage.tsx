@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { CustomCard } from '@/shared/components/CustomCard';
+import { CustomCard } from '@shared/components/CustomCard';
 import { LoginHeader } from '../components/LoginHeader';
 import { LoginForm } from '../components/LoginForm';
 import { LoginLayout } from '../components/LoginLayout';

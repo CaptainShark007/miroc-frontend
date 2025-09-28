@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createUser } from '@/features/admin/api/service';
-import { CreateUserRequest, CreateUserResponse } from '@/features/admin/types';
-import { useToast } from '@/shared/hooks/useToast';
+import { createUser } from '@features/admin/api/service';
+import { CreateUserRequest, CreateUserResponse } from '@features/admin/types';
+import { useToast } from '@shared/hooks/useToast';
 
 export const useCreateUser = () => {
   const queryClient = useQueryClient();

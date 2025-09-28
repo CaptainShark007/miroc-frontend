@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Paper } from '@mui/material';
-import { useToast } from '@/shared/hooks/useToast';
-import { useUsers } from '@/features/admin/hooks/useUsers';
-import { useUserActions } from '@/features/admin/hooks/useUserActions';
-import CustomPagination from '@/shared/components/CustomPagination';
-import ConfirmDialog from '@/shared/components/ConfirmDialog';
-import UserAdminHeader from '@/features/admin/components/UserAdminHeader';
-import UsersTable from '@/features/admin/components/UsersTable';
+import { useToast } from '@shared/hooks/useToast';
+import { useUsers } from '@features/admin/hooks/useUsers';
+import { useUserActions } from '@features/admin/hooks/useUserActions';
+import CustomPagination from '@shared/components/CustomPagination';
+import ConfirmDialog from '@shared/components/ConfirmDialog';
+import UserAdminHeader from '@features/admin/components/UserAdminHeader';
+import UsersTable from '@features/admin/components/UsersTable';
 
 export default function UserAdminPage() {
   const [page, setPage] = useState(0);

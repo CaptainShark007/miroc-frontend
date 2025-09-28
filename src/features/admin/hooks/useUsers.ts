@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { getUsers } from '@/features/admin/api/service';
-import { GetUsersRequest } from '@/features/admin/types';
+import { getUsers } from '@features/admin/api/service';
+import { GetUsersRequest } from '@features/admin/types';
 
 export const useUsers = (params: GetUsersRequest) => {
   return useQuery({

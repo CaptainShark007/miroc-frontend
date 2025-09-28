@@ -7,10 +7,10 @@ import {
   Security,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import Tooltip from '@/shared/components/Tooltip';
-import { useAuth } from '@/shared/hooks/useAuth';
-import UserPermissionsModal from '@/features/admin/components/UserPermissionsModal';
-import { useUserActions } from '@/features/admin/hooks/useUserActions';
+import Tooltip from '@shared/components/Tooltip';
+import { useAuth } from '@shared/hooks/useAuth';
+import UserPermissionsModal from '@features/admin/components/UserPermissionsModal';
+import { useUserActions } from '@features/admin/hooks/useUserActions';
 
 interface DashboardHeaderProps {
   onMenuClick: () => void;

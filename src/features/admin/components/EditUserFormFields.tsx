@@ -1,9 +1,9 @@
 import { Control } from 'react-hook-form';
 import { Box, Typography } from '@mui/material';
-import { FormTextField } from '@/shared/components/FormTextField';
-import { FormPasswordField } from '@/shared/components/FormPasswordField';
-import { FormSelectField } from '@/shared/components/FormSelectField';
-import { EditUserFormData } from '@/features/admin/schemas/editUserSchema';
+import { FormTextField } from '@shared/components/FormTextField';
+import { FormPasswordField } from '@shared/components/FormPasswordField';
+import { FormSelectField } from '@shared/components/FormSelectField';
+import { EditUserFormData } from '@features/admin/schemas/editUserSchema';
 
 interface EditUserFormFieldsProps {
   control: Control<EditUserFormData>;

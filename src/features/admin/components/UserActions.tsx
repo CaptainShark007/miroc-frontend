@@ -1,7 +1,7 @@
 import { Box, IconButton } from '@mui/material';
 import { Edit, Delete } from '@mui/icons-material';
-import Tooltip from '@/shared/components/Tooltip';
-import { User } from '@/features/admin/types';
+import Tooltip from '@shared/components/Tooltip';
+import { User } from '@features/admin/types';
 
 interface UserActionsProps {
   user: User;

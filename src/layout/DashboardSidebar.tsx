@@ -11,15 +11,15 @@ import {
   Construction,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useAppDispatch } from '@/app/store';
-import { clearToken } from '@/features/auth/slices/auth.slice';
-import { useToast } from '@/shared/hooks/useToast';
-import SidebarItem from '@/shared/components/SidebarItem';
-import SidebarDivider from '@/shared/components/SidebarDivider';
-import ThemedDrawer from '@/shared/components/ThemedDrawer';
-import { PopupMenuItem } from '@/shared/components/PopupMenu';
-import { removeLocalStorage } from '@/shared/utils/localStorage';
-import { STORAGE_KEYS } from '@/shared/constants/redux';
+import { useAppDispatch } from '@app/store';
+import { clearToken } from '@features/auth/slices/auth.slice';
+import { useToast } from '@shared/hooks/useToast';
+import SidebarItem from '@shared/components/SidebarItem';
+import SidebarDivider from '@shared/components/SidebarDivider';
+import ThemedDrawer from '@shared/components/ThemedDrawer';
+import { PopupMenuItem } from '@shared/components/PopupMenu';
+import { removeLocalStorage } from '@shared/utils/localStorage';
+import { STORAGE_KEYS } from '@shared/constants/redux';
 
 const drawerWidth = 100;
 

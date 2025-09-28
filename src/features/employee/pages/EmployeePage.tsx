@@ -1,4 +1,4 @@
-import UnderConstruction from '@/shared/components/UnderConstruction';
+import UnderConstruction from '@shared/components/UnderConstruction';
 
 export default function DashboardPage() {
   return (

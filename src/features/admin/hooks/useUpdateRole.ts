@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateRole } from '@/features/admin/api/service';
-import { UpdateRoleRequest, UpdateRoleResponse } from '@/features/admin/types';
-import { useToast } from '@/shared/hooks/useToast';
+import { updateRole } from '@features/admin/api/service';
+import { UpdateRoleRequest, UpdateRoleResponse } from '@features/admin/types';
+import { useToast } from '@shared/hooks/useToast';
 
 interface UpdateRoleParams {
   roleName: string;

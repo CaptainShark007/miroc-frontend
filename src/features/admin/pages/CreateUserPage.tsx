@@ -1,14 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import { Box, Paper } from '@mui/material';
-import { useFormWithSchema } from '@/shared/hooks/useFormWithSchema';
+import { useFormWithSchema } from '@shared/hooks/useFormWithSchema';
 import {
   createUserSchema,
   CreateUserFormData,
-} from '@/features/admin/schemas/createUserSchema';
-import { useCreateUser } from '@/features/admin/hooks/useCreateUser';
-import CreateUserHeader from '@/features/admin/components/CreateUserHeader';
-import CreateUserFormFields from '@/features/admin/components/CreateUserFormFields';
-import CreateUserActions from '@/features/admin/components/CreateUserActions';
+} from '@features/admin/schemas/createUserSchema';
+import { useCreateUser } from '@features/admin/hooks/useCreateUser';
+import CreateUserHeader from '@features/admin/components/CreateUserHeader';
+import CreateUserFormFields from '@features/admin/components/CreateUserFormFields';
+import CreateUserActions from '@features/admin/components/CreateUserActions';
 
 export default function CreateUserPage() {
   const navigate = useNavigate();

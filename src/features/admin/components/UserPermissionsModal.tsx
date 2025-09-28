@@ -27,15 +27,15 @@ import {
   Groups,
   Save,
 } from '@mui/icons-material';
-import { useRoles } from '@/features/admin/hooks/useRoles';
-import { useUpdateRole } from '@/features/admin/hooks/useUpdateRole';
+import { useRoles } from '@features/admin/hooks/useRoles';
+import { useUpdateRole } from '@features/admin/hooks/useUpdateRole';
 import {
   convertAPIRoleToFrontend,
   convertPermissionChangesToAPI,
   UIRole,
   UIModule,
-} from '@/features/admin/utils/permissionsMapper';
-import { Permission as APIPermission } from '@/features/admin/types';
+} from '@features/admin/utils/permissionsMapper';
+import { Permission as APIPermission } from '@features/admin/types';
 
 interface UserPermissionsModalProps {
   open: boolean;

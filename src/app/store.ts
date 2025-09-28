@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
-import authSlice, { initialState } from '@/features/auth/slices/auth.slice';
-import { getLocalStorage } from '@utils/localStorage';
+import authSlice, { initialState } from '@features/auth/slices/auth.slice';
+import { getLocalStorage } from '@shared/utils/localStorage';
 import { AuthState } from '@features/auth/types';
 
 const preLoadedAuthState = getLocalStorage<AuthState>('auth') ?? initialState;
