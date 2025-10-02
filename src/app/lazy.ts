@@ -22,6 +22,12 @@ export const ClientPage = lazy(
 export const ProviderPage = lazy(
   () => import('@features/provider/pages/ProviderPage')
 );
+export const CreateProviderPage = lazy(
+  () => import('@/features/provider/pages/CreateProviderPage')
+);
+export const EditProviderPage = lazy(
+  () => import('@/features/provider/pages/EditProviderPage')
+);
 export const EmployeePage = lazy(
   () => import('@features/employee/pages/EmployeePage')
 );
