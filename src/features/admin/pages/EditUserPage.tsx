@@ -12,6 +12,8 @@ import EditUserHeader from '@features/admin/components/EditUserHeader';
 import EditUserFormFields from '@features/admin/components/EditUserFormFields';
 import EditUserActions from '@features/admin/components/EditUserActions';
 import { useToast } from '@shared/hooks/useToast';
+import { createPatchOperations } from '@shared/utils/jsonPatch';
+import type { User } from '@features/admin/types';
 
 export default function EditUserPage() {
   const navigate = useNavigate();
@@ -73,22 +75,27 @@ export default function EditUserPage() {
   const onSubmit = (data: EditUserFormData) => {
     if (!user) return;
 
-    const updateData: Partial<EditUserFormData> = {
-      dni: data.dni,
-      email: data.email,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      role: data.role,
+    // Crear el objeto actualizado combinando usuario actual con datos del formulario
+    const updatedUser: User = {
+      ...user,
+      ...data,
     };
 
-    if (data.password && data.password.trim() !== '') {
-      updateData.password = data.password;
+    const operations = createPatchOperations(
+      user,
+      updatedUser,
+      ['id', 'status'] // Excluir campos que no se deben actualizar
+    );
+
+    if (operations.length === 0) {
+      showToast('No hay cambios para guardar', 'info');
+      return;
     }
 
     updateUserMutation.mutate(
       {
-        userId: user.dni,
-        data: updateData,
+        dni: user.dni,
+        ops: operations,
       },
       {
         onSuccess: () => {

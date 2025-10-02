@@ -2,7 +2,6 @@ import AxiosClient from '@app/axios';
 import {
   CreateUserRequest,
   CreateUserResponse,
-  UpdateUserRequest,
   UpdateUserResponse,
   DeleteUserResponse,
   GetUsersRequest,
@@ -11,6 +10,7 @@ import {
   UpdateRoleRequest,
   UpdateRoleResponse,
 } from '@features/admin/types';
+import { JsonPatchOp } from '@shared/types/json';
 
 export const getRoles = async (): Promise<RolesResponse> => {
   const response = await AxiosClient.get<RolesResponse>(
@@ -53,11 +53,11 @@ export const createUser = async (
 };
 
 export const updateUser = async (
-  userId: number,
-  data: UpdateUserRequest
+  dni: number,
+  data: JsonPatchOp[]
 ): Promise<UpdateUserResponse> => {
   const response = await AxiosClient.patch<UpdateUserResponse>(
-    `/api/v1/users/${userId}`,
+    `/api/v1/users/${dni}`,
     data
   );
   return response;
