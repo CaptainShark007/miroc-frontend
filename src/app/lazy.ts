@@ -31,6 +31,12 @@ export const EditProviderPage = lazy(
 export const EmployeePage = lazy(
   () => import('@features/employee/pages/EmployeePage')
 );
+export const CreateEmployeePage = lazy(
+  () => import('@features/employee/pages/CreateEmployeePage')
+);
+export const EditEmployeePage = lazy(
+  () => import('@features/employee/pages/EditEmployeePage')
+);
 export const BoxPage = lazy(() => import('@features/box/pages/BoxPage'));
 export const ConstructionPage = lazy(
   () => import('@features/construction/pages/ConstructionPage')

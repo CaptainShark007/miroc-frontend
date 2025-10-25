@@ -13,7 +13,9 @@ import {
   CreateUserPage,
   EditUserPage,
   CreateProviderPage,
-  EditProviderPage
+  EditProviderPage,
+  EditEmployeePage,
+  CreateEmployeePage,
 } from '@app/lazy';
 import { Error404 } from '@shared/components/Error404';
 import { Route, Routes } from 'react-router';
@@ -51,7 +53,11 @@ export default function Router() {
             <Route path='create' element={<CreateProviderPage />} />
             <Route path='edit/:cuit' element={<EditProviderPage />} />
           </Route>
-          <Route path='employees' element={<EmployeePage />} />
+          <Route path='employees'>
+            <Route index element={<EmployeePage />} />
+            <Route path='create' element={<CreateEmployeePage />} />
+            <Route path='edit/:dni' element={<EditEmployeePage />} />
+          </Route>
         </Route>
         <Route path='/box' element={<BoxPage />} />
         <Route path='/works' element={<ConstructionPage />} />
