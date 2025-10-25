@@ -1,16 +1,27 @@
 import { JsonPatchOp } from '@shared/types/json';
 
 /**
+ * Convierte un string de camelCase a PascalCase
+ * @param str - String en camelCase
+ * @returns String en PascalCase
+ */
+const toPascalCase = (str: string): string => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+/**
  * Crea operaciones JSON Patch comparando un objeto original con uno actualizado
  * @param original - Objeto con los valores originales
  * @param updated - Objeto con los valores actualizados
  * @param excludeFields - Array de campos que se deben excluir de la comparación
+ * @param usePascalCase - Si true, convierte los paths a PascalCase (para APIs que lo requieren)
  * @returns Array de operaciones JSON Patch
  */
 export const createPatchOperations = <T extends Record<string, any>>(
   original: T,
   updated: T,
-  excludeFields: string[] = []
+  excludeFields: string[] = [],
+  usePascalCase: boolean = false
 ): JsonPatchOp[] => {
   const operations: JsonPatchOp[] = [];
 
@@ -28,9 +39,10 @@ export const createPatchOperations = <T extends Record<string, any>>(
 
     // Comparar valores usando JSON.stringify para manejar objetos anidados
     if (JSON.stringify(originalValue) !== JSON.stringify(updatedValue)) {
+      const path = usePascalCase ? `/${toPascalCase(key)}` : `/${key}`;
       operations.push({
         op: 'replace',
-        path: `/${key}`,
+        path,
         value: updatedValue,
       });
     }
@@ -63,12 +75,17 @@ export const createPatchOperation = (
  * @param original - Objeto original
  * @param updated - Objeto actualizado
  * @param excludeFields - Campos a excluir de la validación
+ * @param usePascalCase - Si true, convierte los paths a PascalCase
  * @returns true si hay cambios, false si no
  */
 export const hasChanges = <T extends Record<string, any>>(
   original: T,
   updated: T,
-  excludeFields: string[] = []
+  excludeFields: string[] = [],
+  usePascalCase: boolean = false
 ): boolean => {
-  return createPatchOperations(original, updated, excludeFields).length > 0;
+  return (
+    createPatchOperations(original, updated, excludeFields, usePascalCase)
+      .length > 0
+  );
 };
