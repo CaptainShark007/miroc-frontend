@@ -1,8 +1,8 @@
 export interface Provider {
-    cuit: number;
-    firstName: string;
-    address: string;
-    description: string;
+  cuit: number;
+  firstName: string;
+  address: string;
+  description: string;
 }
 
 export interface GetProviderRequest {
@@ -13,8 +13,8 @@ export interface GetProviderRequest {
 export interface CreateProviderRequest {
   cuit: number;
   firstName: string;
-  address: string;
-  description: string;
+  address?: string;
+  description?: string;
 }
 
 export interface UpdateProviderRequest {
@@ -48,7 +48,8 @@ export interface ApiError {
   details: string;
 }
 
-export interface GetProvidersResponse extends ApiResponse<PaginationData<Provider>> {}
+export interface GetProvidersResponse
+  extends ApiResponse<PaginationData<Provider>> {}
 
 export interface CreateProviderResponse extends ApiResponse<Provider> {
   error?: ApiError;
