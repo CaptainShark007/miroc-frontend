@@ -4,6 +4,7 @@ import {
   ConfigurationPage,
   EmployeePage,
   ClientPage,
+  ClientAdminPage,
   ProviderPage,
   BoxPage,
   StockPage,
@@ -69,6 +70,7 @@ export default function Router() {
             <Route path='users' element={<UserAdminPage />} />
             <Route path='users/create' element={<CreateUserPage />} />
             <Route path='users/edit/:id' element={<EditUserPage />} />
+            <Route path='clients' element={<ClientAdminPage />} />
           </Route>
         </Route>
       </Route>

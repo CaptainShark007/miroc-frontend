@@ -19,6 +19,9 @@ export const EditUserPage = lazy(
 export const ClientPage = lazy(
   () => import('@features/client/pages/ClientPage')
 );
+export const ClientAdminPage = lazy(
+  () => import('@features/client/pages/ClientAdminPage')
+);
 export const ProviderPage = lazy(
   () => import('@features/provider/pages/ProviderPage')
 );
