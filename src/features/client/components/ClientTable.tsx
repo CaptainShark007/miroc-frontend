@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { Client } from '../types/clientTypes';
+import { formatDNI } from '@shared/utils/formatters';
 
 interface ClientTableProps {
   clients: Client[];
@@ -71,8 +72,8 @@ export const ClientTable = ({
         </TableHead>
         <TableBody>
           {clients.map((client) => (
-            <TableRow key={client.id} hover>
-              <TableCell>{client.dni}</TableCell>
+            <TableRow key={`client-${client.dni}-${client.id}`} hover>
+              <TableCell>{formatDNI(client.dni)}</TableCell>
               <TableCell>{client.firstName}</TableCell>
               <TableCell>{client.address}</TableCell>
               <TableCell align="right">
@@ -80,7 +81,7 @@ export const ClientTable = ({
                   color="primary"
                   size="small"
                   onClick={() => onEdit(client)}
-                  aria-label="editar cliente"
+                  aria-label={`editar cliente ${client.firstName}`}
                 >
                   <EditIcon />
                 </IconButton>
@@ -88,7 +89,7 @@ export const ClientTable = ({
                   color="error"
                   size="small"
                   onClick={() => onDelete(client)}
-                  aria-label="eliminar cliente"
+                  aria-label={`eliminar cliente ${client.firstName}`}
                 >
                   <DeleteIcon />
                 </IconButton>
