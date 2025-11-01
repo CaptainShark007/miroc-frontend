@@ -43,7 +43,7 @@ const menuItems = [
 const entitiesPopupItems: PopupMenuItem[] = [
   {
     text: 'Clientes',
-    path: '/entities/clients',
+    path: '/admin/clients',
   },
   {
     text: 'Proveedores',
