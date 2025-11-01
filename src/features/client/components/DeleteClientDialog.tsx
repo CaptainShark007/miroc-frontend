@@ -39,7 +39,14 @@ export const DeleteClientDialog = ({
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+    <Dialog 
+      open={open} 
+      onClose={handleClose} 
+      maxWidth="sm" 
+      fullWidth
+      disableRestoreFocus
+      keepMounted={false}
+    >
       <DialogTitle>Confirmar Eliminación</DialogTitle>
       <DialogContent>
         <DialogContentText>
