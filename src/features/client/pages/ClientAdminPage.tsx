@@ -102,38 +102,53 @@ const ClientAdminPage = () => {
     }
   };
 
-  const handleDelete = async (permanent: boolean) => {
+  const handleDelete = (permanent: boolean) => {
     if (!selectedClient) return;
 
-    try {
-      await deleteMutation.mutateAsync({
+    deleteMutation.mutate(
+      {
         dni: selectedClient.dni,
         permanent,
-      });
-      showSuccess(
-        permanent
-          ? 'Cliente eliminado permanentemente'
-          : 'Cliente eliminado correctamente'
-      );
-      handleCloseDeleteDialog();
-    } catch (error: any) {
-      showError(error?.message || 'Error al eliminar el cliente');
-    }
+      },
+      {
+        onSuccess: () => {
+          showSuccess(
+            permanent
+              ? 'Cliente eliminado permanentemente'
+              : 'Cliente eliminado correctamente'
+          );
+          handleCloseDeleteDialog();
+        },
+        onError: (error: any) => {
+          console.error('Error al eliminar:', error);
+          const errorMessage = error?.response?.status === 404 
+            ? 'El endpoint de eliminación no existe en el backend. Verifica que esté implementado DELETE /api/v1/clients/{dni}'
+            : error?.message || 'Error al eliminar el cliente';
+          showError(errorMessage);
+          handleCloseDeleteDialog();
+        },
+      }
+    );
   };
 
-  const handlePatch = async (operations: PatchOperation[]) => {
+  const handlePatch = (operations: PatchOperation[]) => {
     if (!selectedClient) return;
 
-    try {
-      await patchMutation.mutateAsync({
+    patchMutation.mutate(
+      {
         dni: selectedClient.dni,
         operations,
-      });
-      showSuccess('Cliente actualizado correctamente');
-      handleClosePatchDialog();
-    } catch (error: any) {
-      showError(error?.message || 'Error al actualizar el cliente');
-    }
+      },
+      {
+        onSuccess: () => {
+          showSuccess('Cliente actualizado correctamente');
+          handleClosePatchDialog();
+        },
+        onError: (error: any) => {
+          showError(error?.message || 'Error al actualizar el cliente');
+        },
+      }
+    );
   };
 
   const handlePageChange = (newPage: number) => {
