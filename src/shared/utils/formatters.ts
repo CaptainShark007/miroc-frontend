@@ -1,4 +1,5 @@
-export const formatDNI = (dni: number | string): string => {
+export const formatDNI = (dni?: number | string): string => {
+  if (dni === undefined || dni === null) return '';
   const dniString = dni.toString();
   return dniString.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 };
