@@ -44,6 +44,12 @@ export const BoxPage = lazy(() => import('@features/box/pages/BoxPage'));
 export const ConstructionPage = lazy(
   () => import('@features/construction/pages/ConstructionPage')
 );
+export const CreateConstructionPage = lazy(
+  () => import('@features/construction/pages/CreateConstructionPage')
+);
+export const EditConstructionPage = lazy(
+  () => import('@features/construction/pages/EditConstructionPage')
+);
 export const ReportsPage = lazy(
   () => import('@features/reports/pages/ReportsPage')
 );

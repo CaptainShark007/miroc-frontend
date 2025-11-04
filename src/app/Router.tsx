@@ -10,6 +10,8 @@ import {
   StockPage,
   ReportsPage,
   ConstructionPage,
+  CreateConstructionPage,
+  EditConstructionPage,
   UserAdminPage,
   CreateUserPage,
   EditUserPage,
@@ -61,7 +63,11 @@ export default function Router() {
           </Route>
         </Route>
         <Route path='/box' element={<BoxPage />} />
-        <Route path='/works' element={<ConstructionPage />} />
+        <Route path='/works'>
+          <Route index element={<ConstructionPage />} />
+          <Route path='create' element={<CreateConstructionPage />} />
+          <Route path='edit/:nombre' element={<EditConstructionPage />} />
+        </Route>
         <Route path='/stock' element={<StockPage />} />
         <Route path='/reports' element={<ReportsPage />} />
 
