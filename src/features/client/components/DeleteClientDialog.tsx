@@ -34,9 +34,16 @@ export const DeleteClientDialog = ({
   };
 
   const handleClose = () => {
-    setPermanent(false);
     onClose();
   };
+
+  const handleExited = () => {
+    setPermanent(false);
+  };
+
+  if (!open || !client) {
+    return null;
+  }
 
   return (
     <Dialog 
@@ -46,12 +53,15 @@ export const DeleteClientDialog = ({
       fullWidth
       disableRestoreFocus
       keepMounted={false}
+      TransitionProps={{
+        onExited: handleExited,
+      }}
     >
       <DialogTitle>Confirmar Eliminación</DialogTitle>
       <DialogContent>
         <DialogContentText>
           ¿Está seguro que desea eliminar al cliente{' '}
-          <strong>{client?.firstName}</strong> (DNI: {client?.dni})?
+          <strong>{client.firstName}</strong> (DNI: {client.dni})?
         </DialogContentText>
         <FormControlLabel
           control={

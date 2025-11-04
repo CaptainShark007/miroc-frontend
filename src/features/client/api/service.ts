@@ -3,21 +3,36 @@ import {
   Client,
   PaginatedResponse,
   CreateClientPayload,
-  UpdateClientPayload,
   PatchOperation,
+  GetClientsRequest,
+  GetClientResponse,
+  CreateClientResponse,
+  UpdateClientResponse,
+  DeleteClientResponse,
 } from '../types/clientTypes';
+import { JsonPatchOp } from '@shared/types/json';
 
 export const getClients = async (
-  pageIndex = 1,
-  pageSize = 10,
-  search?: string
+  data: GetClientsRequest
 ): Promise<PaginatedResponse<Client>> => {
   const queryParams = new URLSearchParams();
-  queryParams.set('pageIndex', pageIndex.toString());
-  queryParams.set('pageSize', pageSize.toString());
+  queryParams.set('pageIndex', data.pageIndex.toString());
+  queryParams.set('pageSize', data.pageSize.toString());
 
-  if (search) {
-    queryParams.set('q', search);
+  if (data.q) {
+    queryParams.set('q', data.q);
+  }
+  if (data.fDni) {
+    queryParams.set('fDni', data.fDni.toString());
+  }
+  if (data.fFirstName) {
+    queryParams.set('fFirstName', data.fFirstName);
+  }
+  if (data.fAddress) {
+    queryParams.set('fAddress', data.fAddress);
+  }
+  if (data.sort) {
+    queryParams.set('sort', data.sort);
   }
 
   const response = await AxiosClient.get<PaginatedResponse<Client>>(
@@ -27,39 +42,55 @@ export const getClients = async (
   return response;
 };
 
-export const getClientByDni = async (dni: number): Promise<Client> => {
-  return await AxiosClient.get<Client>(`/api/v1/clients/${dni}`);
+export const getClientByDni = async (
+  dni: number
+): Promise<GetClientResponse> => {
+  const response = await AxiosClient.get<GetClientResponse>(
+    `/api/v1/clients/${dni}`
+  );
+  return response;
 };
 
 export const createClient = async (
   payload: CreateClientPayload
-): Promise<Client> => {
-  return await AxiosClient.post<Client>('/api/v1/clients', payload);
+): Promise<CreateClientResponse> => {
+  const response = await AxiosClient.post<CreateClientResponse>(
+    `/api/v1/clients`,
+    payload
+  );
+  return response;
 };
 
 export const updateClient = async (
   dni: number,
-  payload: UpdateClientPayload
-): Promise<Client> => {
-  return await AxiosClient.put<Client>(`/api/v1/clients/${dni}`, payload);
+  data: JsonPatchOp[]
+): Promise<UpdateClientResponse> => {
+  const response = await AxiosClient.patch<UpdateClientResponse>(
+    `/api/v1/clients/${dni}`,
+    data
+  );
+  return response;
 };
 
 export const patchClient = async (
   dni: number,
   operations: PatchOperation[]
-): Promise<Client> => {
-  return await AxiosClient.patch<Client>(
-    `/api/v1/clients/${dni}`,
-    operations
-  );
+): Promise<UpdateClientResponse> => {
+  const jsonPatch: JsonPatchOp[] = operations.map(op => ({
+    op: op.op,
+    path: op.path,
+    value: op.value
+  }));
+  return updateClient(dni, jsonPatch);
 };
 
 export const deleteClient = async (
   dni: number,
   permanent = false
-): Promise<void> => {
+): Promise<DeleteClientResponse> => {
   const url = permanent
     ? `/api/v1/clients/permanent/${dni}`
     : `/api/v1/clients/${dni}`;
-  return await AxiosClient.delete<void>(url);
+  const response = await AxiosClient.delete<DeleteClientResponse>(url);
+  return response;
 };
