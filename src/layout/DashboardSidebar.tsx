@@ -6,7 +6,7 @@ import {
   People,
   // Inventory,
   // BarChart,
-  // Construction,
+  Construction,
   Settings,
   Logout,
 } from '@mui/icons-material';
@@ -35,7 +35,7 @@ const menuItems = [
   { text: 'Panel', icon: <Home />, path: '/dashboard' },
   { text: 'Entidades', icon: <People /> },
   { text: 'Caja', icon: <PointOfSale />, path: '/box' },
-  // { text: 'Obras', icon: <Construction />, path: '/works' },
+  { text: 'Obras', icon: <Construction />, path: '/works' },
   // { text: 'Inventario', icon: <Inventory />, path: '/stock' },
   // { text: 'Reportes', icon: <BarChart />, path: '/reports' },
 ];
