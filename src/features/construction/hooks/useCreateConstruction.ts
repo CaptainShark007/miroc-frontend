@@ -27,10 +27,7 @@ export const useCreateConstruction = () => {
       }
     },
     onError: (error) => {
-      showToast(
-        `Error al crear obra: ${error.error?.message || 'Error desconocido'}`,
-        'error'
-      );
+      showToast(`${error.error?.message || 'Error desconocido'}`, 'error');
     },
   });
 };
