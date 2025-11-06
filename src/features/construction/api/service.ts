@@ -77,7 +77,7 @@ export const deleteConstruction = async (
   name: string
 ): Promise<DeleteConstructionResponse> => {
   const response = await AxiosClient.delete<DeleteConstructionResponse>(
-    `/api/v1/constructions/${name}`
+    `/api/v2/constructions/${name}`
   );
   return response;
 };
