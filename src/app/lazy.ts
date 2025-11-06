@@ -41,6 +41,15 @@ export const EditEmployeePage = lazy(
   () => import('@features/employee/pages/EditEmployeePage')
 );
 export const BoxPage = lazy(() => import('@features/box/pages/BoxPage'));
+export const MovementPage = lazy(
+  () => import('@features/box/pages/MovementPage')
+);
+export const CreateMovementPage = lazy(
+  () => import('@features/box/pages/CreateMovementPage')
+);
+export const EditMovementPage = lazy(
+  () => import('@features/box/pages/EditMovementPage')
+);
 export const ConstructionPage = lazy(
   () => import('@features/construction/pages/ConstructionPage')
 );

@@ -43,7 +43,7 @@ export default function EditProviderPage() {
         cuit: provider.cuit,
         firstName: provider.firstName,
         address: provider.address,
-        description: provider.description
+        description: provider.description,
       });
     }
   }, [provider, reset]);
@@ -74,7 +74,7 @@ export default function EditProviderPage() {
       cuit: data.cuit,
       firstName: data.firstName,
       address: data.address,
-      description: data.description
+      description: data.description,
     };
 
     updateProviderMutation.mutate(
@@ -91,7 +91,7 @@ export default function EditProviderPage() {
   };
 
   const handleBack = () => {
-    navigate('/entities/suppliers');
+    navigate(-1);
   };
 
   if (!provider && isLoading) {
