@@ -116,7 +116,7 @@ export default function EditEmployeePage() {
   };
 
   const handleBack = () => {
-    navigate('/entities/employees');
+    navigate(-1);
   };
 
   if (!employee && isLoading) {
