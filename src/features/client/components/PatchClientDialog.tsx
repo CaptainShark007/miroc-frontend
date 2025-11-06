@@ -57,14 +57,31 @@ export const PatchClientDialog = ({
   };
 
   const handleClose = () => {
-    setField('firstName');
-    setValue('');
     onClose();
   };
 
+  const handleExited = () => {
+    setField('firstName');
+    setValue('');
+  };
+
+  if (!open || !client) {
+    return null;
+  }
+
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
-      <DialogTitle>Actualizar Campo - {client?.firstName}</DialogTitle>
+    <Dialog 
+      open={open} 
+      onClose={handleClose} 
+      maxWidth="sm" 
+      fullWidth
+      disableRestoreFocus
+      keepMounted={false}
+      TransitionProps={{
+        onExited: handleExited,
+      }}
+    >
+      <DialogTitle>Actualizar Campo - {client.firstName}</DialogTitle>
       <DialogContent>
         <Box display="flex" flexDirection="column" gap={2} mt={1}>
           <FormControl fullWidth>

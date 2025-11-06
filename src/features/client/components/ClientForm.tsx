@@ -65,7 +65,14 @@ export const ClientForm = ({
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+    <Dialog 
+      open={open} 
+      onClose={handleClose} 
+      maxWidth="sm" 
+      fullWidth
+      disableRestoreFocus
+      keepMounted={false}
+    >
       <DialogTitle>
         {client ? 'Editar Cliente' : 'Crear Nuevo Cliente'}
       </DialogTitle>
