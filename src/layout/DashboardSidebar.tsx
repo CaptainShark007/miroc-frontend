@@ -34,13 +34,8 @@ interface DashboardSidebarProps {
 const menuItems = [
   { text: 'Panel', icon: <Home />, path: '/dashboard' },
   { text: 'Entidades', icon: <People /> },
-<<<<<<< HEAD
-  { text: 'Caja', icon: <PointOfSale />, path: '/box' },
-  { text: 'Obras', icon: <Construction />, path: '/works' },
-=======
   { text: 'Caja', icon: <PointOfSale />, path: '/movements' },
-  // { text: 'Obras', icon: <Construction />, path: '/works' },
->>>>>>> bd131 (feature(movements):implementación del modulo movimientos)
+  { text: 'Obras', icon: <Construction />, path: '/works' },
   // { text: 'Inventario', icon: <Inventory />, path: '/stock' },
   // { text: 'Reportes', icon: <BarChart />, path: '/reports' },
 ];
