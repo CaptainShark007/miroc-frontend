@@ -37,7 +37,7 @@ export default function CreateProviderPage() {
   };
 
   const handleBack = () => {
-    navigate('/entities/suppliers');
+    navigate(-1);
   };
 
   return (

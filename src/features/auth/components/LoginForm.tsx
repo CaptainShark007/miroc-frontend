@@ -58,7 +58,7 @@ export const LoginForm = ({
           autoComplete='current-password'
         />
 
-        <Box
+        {/* <Box
           sx={{
             display: 'flex',
             alignItems: 'center',
@@ -76,7 +76,7 @@ export const LoginForm = ({
               ¿Olvidaste tu contraseña?
             </Link>
           )}
-        </Box>
+        </Box> */}
 
         <LoadingButton
           type='submit'
