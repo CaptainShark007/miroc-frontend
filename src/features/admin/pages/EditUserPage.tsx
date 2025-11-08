@@ -106,7 +106,7 @@ export default function EditUserPage() {
   };
 
   const handleBack = () => {
-    navigate('/admin/users');
+    navigate(-1);
   };
 
   if (!user && isLoading) {

@@ -37,7 +37,7 @@ export default function CreateEmployeePage() {
   };
 
   const handleBack = () => {
-    navigate('/entities/employees');
+    navigate(-1);
   };
 
   return (

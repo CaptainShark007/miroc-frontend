@@ -39,7 +39,7 @@ export default function CreateUserPage() {
   };
 
   const handleBack = () => {
-    navigate('/admin/users');
+    navigate(-1);
   };
 
   return (

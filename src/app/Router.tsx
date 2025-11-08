@@ -7,9 +7,14 @@ import {
   ClientAdminPage,
   ProviderPage,
   BoxPage,
+  MovementPage,
+  CreateMovementPage,
+  EditMovementPage,
   StockPage,
   ReportsPage,
   ConstructionPage,
+  CreateConstructionPage,
+  EditConstructionPage,
   UserAdminPage,
   CreateUserPage,
   EditUserPage,
@@ -60,8 +65,17 @@ export default function Router() {
             <Route path='edit/:dni' element={<EditEmployeePage />} />
           </Route>
         </Route>
+        <Route path='movements'>
+          <Route index element={<MovementPage />} />
+          <Route path='create' element={<CreateMovementPage />} />
+          <Route path='edit/:code' element={<EditMovementPage />} />
+        </Route>
         <Route path='/box' element={<BoxPage />} />
-        <Route path='/works' element={<ConstructionPage />} />
+        <Route path='/works'>
+          <Route index element={<ConstructionPage />} />
+          <Route path='create' element={<CreateConstructionPage />} />
+          <Route path='edit/:nombre' element={<EditConstructionPage />} />
+        </Route>
         <Route path='/stock' element={<StockPage />} />
         <Route path='/reports' element={<ReportsPage />} />
 
