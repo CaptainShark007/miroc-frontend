@@ -13,6 +13,7 @@ import EditConstructionFormFields from '@features/construction/components/EditCo
 import EditConstructionActions from '@features/construction/components/EditConstructionActions';
 import { useToast } from '@shared/hooks/useToast';
 import { createPatchOperations } from '@shared/utils/jsonPatch';
+import { formatDateToInput } from '@shared/utils/formatters';
 import type { Construction } from '@features/construction/types';
 
 export default function EditConstructionPage() {
@@ -44,7 +45,7 @@ export default function EditConstructionPage() {
       endDate: '',
       address: '',
       description: '',
-      clientDni: undefined,
+      clientDni: 0,
     },
   });
 
@@ -52,8 +53,8 @@ export default function EditConstructionPage() {
     if (construction) {
       reset({
         name: construction.name,
-        startDate: construction.startDate,
-        endDate: construction.endDate,
+        startDate: formatDateToInput(construction.startDate),
+        endDate: formatDateToInput(construction.endDate),
         address: construction.address,
         description: construction.description,
         clientDni: construction.clientDni,

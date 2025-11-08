@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Paper } from '@mui/material';
 import { useToast } from '@shared/hooks/useToast';
@@ -29,6 +29,8 @@ export default function ConstructionPage() {
     sort: `${sortBy},${sortOrder}`,
   });
 
+  const constructions = data?.data?.items || [];
+
   const {
     deleteDialog,
     handleEdit,
@@ -38,7 +40,7 @@ export default function ConstructionPage() {
     isDeleting,
   } = useConstructionActions();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (error) {
       showToast('Error al cargar las obras', 'error');
     }
@@ -72,7 +74,6 @@ export default function ConstructionPage() {
     setPage(0);
   };
 
-  const constructions = data?.data?.items || [];
   const totalItems = data?.data?.totalItems || 0;
   const totalPages = data?.data?.totalPages || 0;
 
