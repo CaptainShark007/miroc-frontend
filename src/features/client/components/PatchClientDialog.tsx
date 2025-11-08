@@ -61,10 +61,12 @@ export const PatchClientDialog = ({
   };
 
   const handleExited = () => {
+    // Limpiar el estado después de que el diálogo se haya cerrado completamente
     setField('firstName');
     setValue('');
   };
 
+  // Solo renderizar el contenido del diálogo si está abierto y el cliente existe
   if (!open || !client) {
     return null;
   }
