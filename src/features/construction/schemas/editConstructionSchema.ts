@@ -1,7 +1,15 @@
 import * as yup from 'yup';
 
 export const editConstructionSchema = yup.object().shape({
-  name: yup.string().required('El nombre es obligatorio'),
+  name: yup
+    .string()
+    .required('El nombre de la obra es obligatorio')
+    .matches(
+      /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ]+$/,
+      'El nombre solo puede contener letras, números y espacios'
+    )
+    .min(3, 'El nombre debe tener al menos 3 caracteres')
+    .max(100, 'El nombre no puede superar los 100 caracteres'),
   startDate: yup.string().required('La fecha de inicio es obligatoria'),
   endDate: yup
     .string()
@@ -17,7 +25,8 @@ export const editConstructionSchema = yup.object().shape({
   address: yup.string().required('La dirección es obligatoria'),
   description: yup
     .string()
-    .max(500, 'La descripción no puede superar los 500 caracteres'),
+    .max(500, 'La descripción no puede superar los 500 caracteres')
+    .default(''),
   clientDni: yup
     .number()
     .typeError('El DNI del cliente debe ser un número')
