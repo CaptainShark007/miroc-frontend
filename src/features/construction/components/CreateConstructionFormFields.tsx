@@ -15,10 +15,28 @@ export default function CreateConstructionFormFields({
         name='name'
         control={control}
         label='Nombre de la Obra *'
+        placeholder='Ej: Casa Rodriguez'
       />
-      <FormTextField name='startDate' control={control} label='' type='date' />
-      <FormTextField name='endDate' control={control} label='' type='date' />
-      <FormTextField name='address' control={control} label='Ubicación *' />
+      <FormTextField
+        name='startDate'
+        control={control}
+        label='Fecha de Inicio de la Obra *'
+        type='date'
+        InputLabelProps={{ shrink: true }}
+      />
+      <FormTextField
+        name='endDate'
+        control={control}
+        label='Fecha de Finalización de la Obra *'
+        type='date'
+        InputLabelProps={{ shrink: true }}
+      />
+      <FormTextField
+        name='address'
+        control={control}
+        label='Dirección de la Obra *'
+        placeholder='Ej: Av. Libertador 1234'
+      />
       <FormTextField
         name='description'
         control={control}

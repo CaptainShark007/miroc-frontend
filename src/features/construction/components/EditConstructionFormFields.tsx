@@ -12,18 +12,30 @@ export default function EditConstructionFormFields({
   return (
     <>
       <FormTextField
+        name='name'
+        control={control}
+        label='Nombre de la Obra *'
+        disabled
+      />
+      <FormTextField
         name='startDate'
         control={control}
-        label='Fecha de Inicio'
+        label='Fecha de Inicio de la Obra *'
         type='date'
+        InputLabelProps={{ shrink: true }}
       />
       <FormTextField
         name='endDate'
         control={control}
-        label='Fecha de Fin'
+        label='Fecha de Finalización de la Obra *'
         type='date'
+        InputLabelProps={{ shrink: true }}
       />
-      <FormTextField name='address' control={control} label='Ubicación' />
+      <FormTextField
+        name='address'
+        control={control}
+        label='Dirección de la Obra *'
+      />
       <FormTextField
         name='description'
         control={control}
@@ -34,7 +46,7 @@ export default function EditConstructionFormFields({
       <FormTextField
         name='clientDni'
         control={control}
-        label='DNI Cliente'
+        label='DNI Cliente *'
         type='number'
       />
     </>
