@@ -28,15 +28,7 @@ export interface CreateConstructionRequest {
   clientDni: number;
 }
 
-export interface UpdateConstructionRequest {
-  startDate?: string;
-  endDate?: string;
-  address?: string;
-  description?: string;
-  clientDNI?: number;
-}
-
-export interface PaginationData<T> {
+interface PaginationData<T> {
   items: T[];
   totalItems: number;
   totalPages: number;
@@ -46,20 +38,14 @@ export interface PaginationData<T> {
   hasNextPage: boolean;
 }
 
-export interface PatchOperation {
-  op: string;
-  path: string;
-  value?: any;
-}
-
-export type ApiResponse<T> = {
+type ApiResponse<T> = {
   success: boolean;
   message: string;
   data: T;
   status: number;
 };
 
-export interface ApiError {
+interface ApiError {
   statusCode: number;
   message: string;
   path: string;
@@ -80,3 +66,4 @@ export interface UpdateConstructionResponse extends ApiResponse<Construction> {
 }
 
 export interface DeleteConstructionResponse extends ApiResponse<void> {}
+
