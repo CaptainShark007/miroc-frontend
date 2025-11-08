@@ -11,7 +11,7 @@ interface FormTextFieldProps<T extends FieldValues>
 export const FormTextField = forwardRef<
   HTMLDivElement,
   FormTextFieldProps<any>
->(({ name, control, ...props }, ref) => {
+>(({ name, control, helperText, ...props }, ref) => {
   return (
     <Controller
       name={name}
@@ -24,7 +24,7 @@ export const FormTextField = forwardRef<
           variant='outlined'
           fullWidth
           error={fieldState.invalid}
-          helperText={fieldState.error?.message}
+          helperText={fieldState.error?.message || helperText}
           sx={{
             '& .MuiOutlinedInput-root': {
               borderRadius: 2,
