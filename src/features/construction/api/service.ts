@@ -30,10 +30,10 @@ export const getConstructions = async (
     queryParams.set('fEndDate', data.fEndDate);
   }
   if (data.fDescription) {
-    queryParams.set('fDescripcion', data.fDescription);
+    queryParams.set('fDescription', data.fDescription);
   }
   if (data.fClientDni) {
-    queryParams.set('fDniCliente', data.fClientDni.toString());
+    queryParams.set('fClientDni', data.fClientDni.toString());
   }
   if (data.sort) {
     queryParams.set('sort', data.sort);
@@ -50,7 +50,7 @@ export const getConstructionByNombre = async (
   name: string
 ): Promise<GetConstructionResponse> => {
   return await AxiosClient.get<GetConstructionResponse>(
-    `/api/v1/constructions/${name}`
+    `/api/v1/constructions/${encodeURIComponent(name)}`
   );
 };
 
@@ -67,17 +67,18 @@ export const updateConstruction = async (
   name: string,
   data: JsonPatchOp[]
 ): Promise<UpdateConstructionResponse> => {
-  return await AxiosClient.put<UpdateConstructionResponse>(
-    `/api/v1/constructions/${name}`,
+  return await AxiosClient.patch<UpdateConstructionResponse>(
+    `/api/v1/constructions/${encodeURIComponent(name)}`,
     data
   );
 };
 
 export const deleteConstruction = async (
-  name: string
+  name: string,
+  _clientDni: number
 ): Promise<DeleteConstructionResponse> => {
   const response = await AxiosClient.delete<DeleteConstructionResponse>(
-    `/api/v2/constructions/${name}`
+    `/api/v1/constructions/${encodeURIComponent(name)}`
   );
   return response;
 };
