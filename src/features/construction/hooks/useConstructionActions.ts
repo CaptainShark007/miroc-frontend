@@ -40,14 +40,20 @@ export const useConstructionActions = (): UseConstructionActionsReturn => {
 
   const handleConfirmDelete = () => {
     if (deleteDialog.construction) {
-      deleteConstructionMutation.mutate(deleteDialog.construction.name, {
-        onSuccess: () => {
-          setDeleteDialog({ open: false, construction: null });
+      deleteConstructionMutation.mutate(
+        { 
+          name: deleteDialog.construction.name,
+          clientDni: deleteDialog.construction.clientDni
         },
-        onError: () => {
-          setDeleteDialog({ open: false, construction: null });
-        },
-      });
+        {
+          onSuccess: () => {
+            setDeleteDialog({ open: false, construction: null });
+          },
+          onError: () => {
+            setDeleteDialog({ open: false, construction: null });
+          },
+        }
+      );
     }
   };
 
