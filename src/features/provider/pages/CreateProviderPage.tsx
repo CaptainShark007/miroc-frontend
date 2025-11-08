@@ -9,10 +9,12 @@ import { useCreateProvider } from '@/features/provider/hooks/useCreateProvider';
 import CreateProviderHeader from '@/features/provider/components/CreateProviderHeader';
 import CreateProviderFormFields from '@/features/provider/components/CreateProviderFormFields';
 import CreateProviderActions from '@/features/provider/components/CreateProviderActions';
+import { useToast } from '@/shared/hooks/useToast';
 
 export default function CreateProviderPage() {
   const navigate = useNavigate();
   const createProviderMutation = useCreateProvider();
+  const { showToast } = useToast();
 
   const {
     control,
@@ -28,12 +30,13 @@ export default function CreateProviderPage() {
     },
   });
 
-  const onSubmit = (data: CreateProviderFormData) => {
-    createProviderMutation.mutate(data, {
-      onSuccess: () => {
-        navigate('/entities/suppliers');
-      },
-    });
+  const onSubmit = async (data: CreateProviderFormData) => {
+    try {
+      await createProviderMutation.mutateAsync(data);
+      navigate('/entities/suppliers');
+    } catch (error: any) {
+      showToast(`Error al crear proveedor: ${error.message}`, 'error');
+    }
   };
 
   const handleBack = () => {
