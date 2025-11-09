@@ -1,0 +1,219 @@
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  Box,
+  IconButton,
+  Typography,
+  Divider,
+  Chip,
+} from '@mui/material';
+import { Close, Receipt } from '@mui/icons-material';
+import { Movement } from '@features/box/types';
+import { formatNumber } from '@shared/utils/formatters';
+
+interface MovementDetailDialogProps {
+  open: boolean;
+  onClose: () => void;
+  movement: Movement | null;
+}
+
+export default function MovementDetailDialog({
+  open,
+  onClose,
+  movement,
+}: MovementDetailDialogProps) {
+  if (!movement) return null;
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('es-AR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
+  const getPaymentMethodLabel = (method: string) => {
+    const labels: Record<string, string> = {
+      CASH: 'Efectivo',
+      CREDIT_CARD: 'Tarjeta de Crédito',
+      DEBIT_CARD: 'Tarjeta de Débito',
+      BANK_TRANSFER: 'Transferencia Bancaria',
+      PAYPAL: 'PayPal',
+      MOBILE_PAYMENT: 'Pago Móvil',
+    };
+    return labels[method] || method;
+  };
+
+  const getEntityLabel = (entity: Movement['associatedEntity']) => {
+    if (!entity) return 'General';
+    const typeLabels: Record<string, string> = {
+      CLIENTE: 'Cliente',
+      PROVEEDOR: 'Proveedor',
+      EMPLEADO: 'Empleado',
+      OBRA: 'Obra',
+    };
+    return typeLabels[entity.type] || entity.type;
+  };
+
+  return (
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth='sm'
+      fullWidth
+      PaperProps={{
+        sx: {
+          borderRadius: 2,
+        },
+      }}
+    >
+      <DialogTitle
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          pb: 2,
+        }}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Receipt color='primary' />
+          <Typography variant='h6' fontWeight={600}>
+            Detalle del Movimiento
+          </Typography>
+        </Box>
+        <IconButton onClick={onClose} size='small'>
+          <Close />
+        </IconButton>
+      </DialogTitle>
+
+      <DialogContent dividers>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+          <Box>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <Typography variant='body2' color='text.secondary'>
+                Código
+              </Typography>
+              <Typography variant='body1' fontWeight={600}>
+                #{formatNumber(movement.codeMovement)}
+              </Typography>
+            </Box>
+          </Box>
+
+          <Divider />
+
+          <Box>
+            <Typography variant='body2' color='text.secondary' gutterBottom>
+              Fecha y Hora
+            </Typography>
+            <Typography variant='body1' fontWeight={500}>
+              {formatDate(movement.date)}
+            </Typography>
+          </Box>
+
+          <Box>
+            <Typography variant='body2' color='text.secondary' gutterBottom>
+              Concepto
+            </Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Typography variant='body1' fontWeight={500}>
+                {movement.conceptName}
+              </Typography>
+              <Chip
+                label={
+                  movement.conceptType === 'ingreso' ? 'Ingreso' : 'Egreso'
+                }
+                color={movement.conceptType === 'ingreso' ? 'success' : 'error'}
+                size='small'
+                variant='outlined'
+              />
+            </Box>
+          </Box>
+
+          {movement.conceptDescription && (
+            <Box>
+              <Typography variant='body2' color='text.secondary' gutterBottom>
+                Descripción del Concepto
+              </Typography>
+              <Typography variant='body1'>{movement.conceptDescription}</Typography>
+            </Box>
+          )}
+
+          <Divider />
+
+          <Box>
+            <Typography variant='body2' color='text.secondary' gutterBottom>
+              Monto
+            </Typography>
+            <Typography
+              variant='h5'
+              fontWeight={700}
+              color={
+                movement.conceptType === 'ingreso' ? 'success.main' : 'error.main'
+              }
+            >
+              {movement.conceptType === 'ingreso' ? '+' : '-'} $
+              {formatNumber(movement.amount)}
+            </Typography>
+          </Box>
+
+          <Box>
+            <Typography variant='body2' color='text.secondary' gutterBottom>
+              Método de Pago
+            </Typography>
+            <Chip
+              label={getPaymentMethodLabel(movement.paymentMethod)}
+              size='medium'
+              variant='outlined'
+            />
+          </Box>
+
+          <Divider />
+
+          <Box>
+            <Typography variant='body2' color='text.secondary' gutterBottom>
+              Entidad Asociada
+            </Typography>
+            {movement.associatedEntity ? (
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
+                <Typography variant='body1' fontWeight={500}>
+                  {getEntityLabel(movement.associatedEntity)}
+                </Typography>
+                <Typography variant='body2' color='text.secondary'>
+                  ID: {movement.associatedEntity.id}
+                </Typography>
+              </Box>
+            ) : (
+              <Typography variant='body1'>General</Typography>
+            )}
+          </Box>
+        </Box>
+      </DialogContent>
+
+      <DialogActions sx={{ px: 3, py: 2 }}>
+        <Button
+          onClick={onClose}
+          variant='contained'
+          sx={{
+            borderRadius: 2,
+            textTransform: 'none',
+            fontWeight: 600,
+          }}
+        >
+          Cerrar
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+}
