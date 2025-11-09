@@ -11,7 +11,7 @@ export default function EditProviderFormFields({
 }: EditProviderFormFieldsProps) {
   return (
     <>
-      <FormTextField name='cuit' control={control} label='CUIT *' type='number' />
+      <FormTextField name='cuit' control={control} label='CUIT *' type='number' disabled />
 
       <FormTextField name='firstName' control={control} label='Nombre *' />
 

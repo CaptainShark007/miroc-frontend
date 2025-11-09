@@ -15,6 +15,7 @@ import MovementTableRow from './MovementTableRow';
 interface MovementsTableProps {
   movements: Movement[];
   isLoading: boolean;
+  onView: (movement: Movement) => void;
   onEdit: (movement: Movement) => void;
   onDelete: (movement: Movement) => void;
   sortBy: string;
@@ -25,6 +26,7 @@ interface MovementsTableProps {
 export default function MovementsTable({
   movements,
   isLoading,
+  onView,
   onEdit,
   onDelete,
   sortBy,
@@ -96,6 +98,7 @@ export default function MovementsTable({
               <TableRow key={movement.codeMovement} hover>
                 <MovementTableRow
                   movement={movement}
+                  onView={onView}
                   onEdit={onEdit}
                   onDelete={onDelete}
                 />

@@ -1,7 +1,8 @@
 import { TableCell } from '@mui/material';
-import { formatDNI } from '@shared/utils/formatters';
+import { formatDNI, formatDateToDisplay } from '@shared/utils/formatters';
 import { Construction } from '@features/construction/types';
 import ConstructionActions from './ConstructionActions';
+import ConstructionStatusBadge from './ConstructionStatusBadge';
 
 interface ConstructionTableRowProps {
   construction: Construction;
@@ -17,8 +18,14 @@ export default function ConstructionTableRow({
   return (
     <>
       <TableCell>{construction.name}</TableCell>
-      <TableCell>{construction.startDate}</TableCell>
-      <TableCell>{construction.endDate}</TableCell>
+      <TableCell>
+        <ConstructionStatusBadge 
+          startDate={construction.startDate}
+          endDate={construction.endDate}
+        />
+      </TableCell>
+      <TableCell>{formatDateToDisplay(construction.startDate)}</TableCell>
+      <TableCell>{formatDateToDisplay(construction.endDate)}</TableCell>
       <TableCell>{construction.address}</TableCell>
       <TableCell>{formatDNI(construction.clientDni)}</TableCell>
       <TableCell sx={{ textAlign: 'center' }}>

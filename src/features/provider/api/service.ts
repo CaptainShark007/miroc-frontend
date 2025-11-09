@@ -13,10 +13,30 @@ import {
 export const getProviders = async (
 	data: GetProviderRequest
 ): Promise<GetProvidersResponse> => {
+	const queryParams = new URLSearchParams();
+	queryParams.set('pageIndex', data.pageIndex.toString());
+	queryParams.set('pageSize', data.pageSize.toString());
+
+	if (data.q) {
+		queryParams.set('q', data.q);
+	}
+	if (data.fCuit) {
+		queryParams.set('fCuit', data.fCuit.toString());
+	}
+	if (data.fFirstName) {
+		queryParams.set('fFirstName', data.fFirstName);
+	}
+	if (data.fAddress) {
+		queryParams.set('fAddress', data.fAddress);
+	}
+	if (data.sort) {
+		queryParams.set('sort', data.sort);
+	}
+
 	const response = await AxiosClient.get<GetProvidersResponse>(
-		`/api/v1/providers?pageIndex=${data.pageIndex}&pageSize=${data.pageSize}`
+		`/api/v1/providers?${queryParams.toString()}`
 	);
-	return response
+	return response;
 }
 
 export const createProvider = async (

@@ -42,45 +42,48 @@ export default function ConstructionTable({
           <TableRow sx={{ bgcolor: 'background.default' }}>
             <TableCell sx={{ fontWeight: 600 }}>
               <TableSortLabel
-                active={sortBy === 'nombre'}
-                direction={sortBy === 'nombre' ? sortOrder : 'asc'}
-                onClick={createSortHandler('nombre')}
+                active={sortBy === 'name'}
+                direction={sortBy === 'name' ? sortOrder : 'asc'}
+                onClick={createSortHandler('name')}
               >
                 Nombre
               </TableSortLabel>
             </TableCell>
             <TableCell sx={{ fontWeight: 600 }}>
+              Estado
+            </TableCell>
+            <TableCell sx={{ fontWeight: 600 }}>
               <TableSortLabel
-                active={sortBy === 'fechaInicio'}
-                direction={sortBy === 'fechaInicio' ? sortOrder : 'asc'}
-                onClick={createSortHandler('fechaInicio')}
+                active={sortBy === 'start_date'}
+                direction={sortBy === 'start_date' ? sortOrder : 'asc'}
+                onClick={createSortHandler('start_date')}
               >
                 Fecha Inicio
               </TableSortLabel>
             </TableCell>
             <TableCell sx={{ fontWeight: 600 }}>
               <TableSortLabel
-                active={sortBy === 'fechaFin'}
-                direction={sortBy === 'fechaFin' ? sortOrder : 'asc'}
-                onClick={createSortHandler('fechaFin')}
+                active={sortBy === 'end_date'}
+                direction={sortBy === 'end_date' ? sortOrder : 'asc'}
+                onClick={createSortHandler('end_date')}
               >
                 Fecha Fin
               </TableSortLabel>
             </TableCell>
             <TableCell sx={{ fontWeight: 600 }}>
               <TableSortLabel
-                active={sortBy === 'ubicacion'}
-                direction={sortBy === 'ubicacion' ? sortOrder : 'asc'}
-                onClick={createSortHandler('ubicacion')}
+                active={sortBy === 'address'}
+                direction={sortBy === 'address' ? sortOrder : 'asc'}
+                onClick={createSortHandler('address')}
               >
                 Ubicación
               </TableSortLabel>
             </TableCell>
             <TableCell sx={{ fontWeight: 600 }}>
               <TableSortLabel
-                active={sortBy === 'dniCliente'}
-                direction={sortBy === 'dniCliente' ? sortOrder : 'asc'}
-                onClick={createSortHandler('dniCliente')}
+                active={sortBy === 'client_dni'}
+                direction={sortBy === 'client_dni' ? sortOrder : 'asc'}
+                onClick={createSortHandler('client_dni')}
               >
                 DNI Cliente
               </TableSortLabel>
@@ -93,21 +96,24 @@ export default function ConstructionTable({
         <TableBody>
           {isLoading ? (
             <TableRow>
-              <TableCell colSpan={6} sx={{ textAlign: 'center', py: 4 }}>
+              <TableCell colSpan={7} sx={{ textAlign: 'center', py: 4 }}>
                 <CircularProgress />
               </TableCell>
             </TableRow>
           ) : constructions.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={6} sx={{ textAlign: 'center', py: 4 }}>
+              <TableCell colSpan={7} sx={{ textAlign: 'center', py: 4 }}>
                 <Typography color='text.secondary'>
                   No se encontraron obras
                 </Typography>
               </TableCell>
             </TableRow>
           ) : (
-            constructions.map((construction: Construction) => (
-              <TableRow key={construction.name} hover>
+            constructions.map((construction: Construction, index: number) => (
+              <TableRow
+                key={`${construction.name}-${construction.clientDni}-${index}`}
+                hover
+              >
                 <ConstructionTableRow
                   construction={construction}
                   onEdit={onEdit}

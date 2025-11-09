@@ -48,6 +48,7 @@ export default function ConceptFormDialog({
     defaultValues: {
       name: '',
       type: 'ingreso',
+      description: '',
     },
   });
 
@@ -56,11 +57,13 @@ export default function ConceptFormDialog({
       reset({
         name: concept.name,
         type: concept.type,
+        description: concept.description || '',
       });
     } else {
       reset({
         name: '',
         type: 'ingreso',
+        description: '',
       });
     }
   }, [concept, reset, open]);
@@ -73,7 +76,7 @@ export default function ConceptFormDialog({
           data: {
             name: data.name,
             type: data.type,
-            description: '',
+            description: data.description || '',
           },
         });
         showToast('Concepto actualizado exitosamente', 'success');
@@ -81,17 +84,26 @@ export default function ConceptFormDialog({
         await createMutation.mutateAsync({
           name: data.name,
           type: data.type,
-          description: '',
+          description: data.description || '',
         });
         showToast('Concepto creado exitosamente', 'success');
       }
       onClose();
       reset();
-    } catch {
-      showToast(
-        `Error al ${concept ? 'actualizar' : 'crear'} el concepto`,
-        'error'
-      );
+    } catch (error: any) {
+      const errorMessage = error?.error?.message || '';
+      
+      if (errorMessage.toLowerCase().includes('duplicate') || 
+          errorMessage.toLowerCase().includes('duplicado') ||
+          errorMessage.toLowerCase().includes('already exists') ||
+          errorMessage.toLowerCase().includes('ya existe')) {
+        showToast('Ya existe un concepto con ese nombre', 'error');
+      } else {
+        showToast(
+          `Error al ${concept ? 'actualizar' : 'crear'} el concepto`,
+          'error'
+        );
+      }
     }
   };
 
@@ -148,6 +160,15 @@ export default function ConceptFormDialog({
               control={control}
               label='Tipo *'
               options={typeOptions}
+            />
+
+            <FormTextField
+              name='description'
+              control={control}
+              label='Descripción'
+              placeholder='Descripción del concepto (opcional)'
+              multiline
+              rows={3}
             />
           </Box>
         </DialogContent>

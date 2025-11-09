@@ -10,6 +10,11 @@ export const conceptSchema = yup.object({
     .mixed<'ingreso' | 'egreso'>()
     .required('El tipo es requerido')
     .oneOf(['ingreso', 'egreso'], 'El tipo debe ser ingreso o egreso'),
+  description: yup
+    .string()
+    .max(500, 'La descripción no puede exceder 500 caracteres')
+    .notRequired()
+    .default(''),
 });
 
 export type ConceptFormData = yup.InferType<typeof conceptSchema>;

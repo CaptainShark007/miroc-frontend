@@ -1,7 +1,15 @@
 import * as yup from 'yup';
 
 export const createConstructionSchema = yup.object().shape({
-  name: yup.string().required('El nombre de la obra es obligatorio'),
+  name: yup
+    .string()
+    .required('El nombre de la obra es obligatorio')
+    .matches(
+      /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ]+$/,
+      'El nombre solo puede contener letras, números y espacios'
+    )
+    .min(3, 'El nombre debe tener al menos 3 caracteres')
+    .max(100, 'El nombre no puede superar los 100 caracteres'),
   startDate: yup.string().required('La fecha de inicio es obligatoria'),
   endDate: yup
     .string()

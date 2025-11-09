@@ -134,7 +134,7 @@ export default function EditMovementPage() {
   }
 
   return (
-    <Box sx={{ p: 3 }}>
+    <Box sx={{ p: 3, height: 'calc(100vh - 64px)', overflow: 'auto' }}>
       <EditMovementHeader
         onBack={handleBack}
         movementCode={movement.codeMovement}

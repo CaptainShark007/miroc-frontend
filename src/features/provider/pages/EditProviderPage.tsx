@@ -67,7 +67,7 @@ export default function EditProviderPage() {
     }
   }, [cuit, provider, isLoading, error, navigate, showToast]);
 
-  const onSubmit = (data: EditProviderFormData) => {
+  const onSubmit = async (data: EditProviderFormData) => {
     if (!provider) return;
 
     const updateData: Partial<EditProviderFormData> = {
@@ -77,17 +77,16 @@ export default function EditProviderPage() {
       description: data.description,
     };
 
-    updateProviderMutation.mutate(
-      {
+    try {
+      await updateProviderMutation.mutateAsync({
         providerCuit: provider.cuit,
         data: updateData,
-      },
-      {
-        onSuccess: () => {
-          navigate('/entities/suppliers');
-        },
-      }
-    );
+      });
+      showToast('Proveedor actualizado exitosamente', 'success');
+      navigate('/entities/suppliers');
+    } catch (error: any) {
+      showToast(`Error al actualizar proveedor: ${error.message}`, 'error');
+    }
   };
 
   const handleBack = () => {

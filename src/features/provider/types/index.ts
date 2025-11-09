@@ -8,6 +8,11 @@ export interface Provider {
 export interface GetProviderRequest {
   pageIndex: number;
   pageSize: number;
+  q?: string;
+  fCuit?: number;
+  fFirstName?: string;
+  fAddress?: string;
+  sort?: string;
 }
 
 export interface CreateProviderRequest {

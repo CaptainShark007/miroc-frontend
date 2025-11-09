@@ -5,12 +5,14 @@ import MovementActions from './MovementActions';
 
 interface MovementTableRowProps {
   movement: Movement;
+  onView: (movement: Movement) => void;
   onEdit: (movement: Movement) => void;
   onDelete: (movement: Movement) => void;
 }
 
 export default function MovementTableRow({
   movement,
+  onView,
   onEdit,
   onDelete,
 }: MovementTableRowProps) {
@@ -74,6 +76,7 @@ export default function MovementTableRow({
       <TableCell>
         <MovementActions
           movement={movement}
+          onView={onView}
           onEdit={onEdit}
           onDelete={onDelete}
         />
