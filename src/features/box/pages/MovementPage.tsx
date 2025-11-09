@@ -5,11 +5,13 @@ import { useToast } from '@shared/hooks/useToast';
 import { useDebounce } from '@shared/hooks/useDebounce';
 import { useMovements } from '@features/box/hooks/useMovements';
 import { useMovementActions } from '@features/box/hooks/useMovementActions';
+import { Movement } from '@features/box/types';
 import CustomPagination from '@shared/components/CustomPagination';
 import ConfirmDialog from '@shared/components/ConfirmDialog';
 import MovementsHeader from '@features/box/components/MovementsHeader';
 import MovementsTable from '@features/box/components/MovementsTable';
 import ConceptManagementModal from '@features/box/components/ConceptManagementModal';
+import MovementDetailDialog from '@features/box/components/MovementDetailDialog';
 
 export default function MovementPage() {
   const [page, setPage] = useState(0);
@@ -20,6 +22,13 @@ export default function MovementPage() {
   const [sortBy, setSortBy] = useState('date');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [conceptModalOpen, setConceptModalOpen] = useState(false);
+  const [detailDialog, setDetailDialog] = useState<{
+    open: boolean;
+    movement: Movement | null;
+  }>({
+    open: false,
+    movement: null,
+  });
 
   const { showToast } = useToast();
   const navigate = useNavigate();
@@ -98,6 +107,14 @@ export default function MovementPage() {
     setConceptModalOpen(false);
   };
 
+  const handleViewDetail = (movement: Movement) => {
+    setDetailDialog({ open: true, movement });
+  };
+
+  const handleCloseDetail = () => {
+    setDetailDialog({ open: false, movement: null });
+  };
+
   const movements = data?.data?.items || [];
   const totalItems = data?.data?.totalItems || 0;
   const totalPages = data?.data?.totalPages || 0;
@@ -130,6 +147,7 @@ export default function MovementPage() {
           <MovementsTable
             movements={movements}
             isLoading={isLoading}
+            onView={handleViewDetail}
             onEdit={handleEdit}
             onDelete={handleDelete}
             sortBy={sortBy}
@@ -168,6 +186,12 @@ export default function MovementPage() {
       <ConceptManagementModal
         open={conceptModalOpen}
         onClose={handleCloseConceptModal}
+      />
+
+      <MovementDetailDialog
+        open={detailDialog.open}
+        onClose={handleCloseDetail}
+        movement={detailDialog.movement}
       />
     </Box>
   );
