@@ -26,7 +26,7 @@ const paymentMethodOptions = [
 const entityConfigs = {
   client: {
     endpoint: '/api/v1/clients',
-    idField: 'dni',
+    idField: 'id',
     labelFields: ['firstName', 'lastName', 'dni'],
     searchParam: 'q',
   },
@@ -44,7 +44,7 @@ const entityConfigs = {
   },
   construction: {
     endpoint: '/api/v1/constructions',
-    idField: 'constructionId',
+    idField: 'name',
     labelFields: ['name'],
     searchParam: 'q',
   },
