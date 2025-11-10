@@ -8,9 +8,7 @@ export const useAuth = () => {
   const getDecodedToken = (): JwtPayload | null => {
     if (!token) return null;
     const decoded = decodeJWT<JwtPayload>(token);
-    console.log('🔐 Token decodificado:', decoded);
-    console.log('📋 Permisos del usuario:', decoded?.permission);
-    console.log('👤 Role del usuario:', decoded?.role);
+
     return decoded;
   };
 
