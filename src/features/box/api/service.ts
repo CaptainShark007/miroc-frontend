@@ -7,6 +7,7 @@ import {
   GetMovementsRequest,
   GetMovementsResponse,
   GetMovementResponse,
+  GetMovementsSummaryResponse,
   ConceptFilter,
   GetConceptsArrayResponse,
   GetConceptResponse,
@@ -59,6 +60,15 @@ export const getMovementByCode = async (
 
   return response;
 };
+
+export const getMovementsSummary =
+  async (): Promise<GetMovementsSummaryResponse> => {
+    const response = await AxiosClient.get<GetMovementsSummaryResponse>(
+      `/api/v1/movements/summary`
+    );
+
+    return response;
+  };
 
 export const createMovement = async (
   data: CreateMovementRequest

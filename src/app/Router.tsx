@@ -6,7 +6,6 @@ import {
   ClientPage,
   ClientAdminPage,
   ProviderPage,
-  BoxPage,
   MovementPage,
   CreateMovementPage,
   EditMovementPage,
@@ -70,7 +69,6 @@ export default function Router() {
           <Route path='create' element={<CreateMovementPage />} />
           <Route path='edit/:code' element={<EditMovementPage />} />
         </Route>
-        <Route path='/box' element={<BoxPage />} />
         <Route path='/works'>
           <Route index element={<ConstructionPage />} />
           <Route path='create' element={<CreateConstructionPage />} />

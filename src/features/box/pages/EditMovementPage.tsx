@@ -8,6 +8,7 @@ import {
 } from '@features/box/schemas/createMovementSchema';
 import { useUpdateMovement } from '@features/box/hooks/useUpdateMovement';
 import { useMovementByCode } from '@features/box/hooks/useMovementByCode';
+import { useConcepts } from '@features/box/hooks/useConcepts';
 import EditMovementHeader from '@features/box/components/EditMovementHeader';
 import EditMovementFormFields from '@features/box/components/EditMovementFormFields';
 import EditMovementActions from '@features/box/components/EditMovementActions';
@@ -21,6 +22,7 @@ export default function EditMovementPage() {
   const { showToast } = useToast();
 
   const { data, isLoading, error } = useMovementByCode(code);
+  const { data: conceptsData } = useConcepts({ pageSize: 100 });
 
   const movement = data?.data;
 
@@ -36,43 +38,48 @@ export default function EditMovementPage() {
       amount: 0,
       paymentMethod: PaymentMethod.CASH,
       conceptId: undefined,
-      clientId: null,
-      providerId: null,
-      employeeId: null,
-      constructionId: null,
+      clientDni: null,
+      providerCuit: null,
+      employeeDni: null,
+      constructionName: null,
     },
   });
 
   useEffect(() => {
-    if (movement) {
-      const entityId =
+    if (movement && conceptsData?.data) {
+      const concepts = conceptsData.data;
+      const concept = concepts.find((c) => c.name === movement.conceptName);
+
+      const clientDni =
         movement.associatedEntity?.type === 'CLIENTE'
-          ? movement.associatedEntity.id
+          ? movement.associatedEntity.key
           : null;
-      const providerId =
+      const providerCuit =
         movement.associatedEntity?.type === 'PROVEEDOR'
-          ? movement.associatedEntity.id
+          ? movement.associatedEntity.key
           : null;
-      const employeeId =
+      const employeeDni =
         movement.associatedEntity?.type === 'EMPLEADO'
-          ? movement.associatedEntity.id
+          ? movement.associatedEntity.key
           : null;
-      const constructionId =
+      const constructionName =
         movement.associatedEntity?.type === 'OBRA'
-          ? movement.associatedEntity.id
+          ? String(movement.associatedEntity.key)
           : null;
 
-      reset({
+      const formData = {
         amount: movement.amount,
         paymentMethod: movement.paymentMethod as PaymentMethod,
-        conceptId: (movement as any).conceptId || undefined,
-        clientId: entityId,
-        providerId: providerId,
-        employeeId: employeeId,
-        constructionId: constructionId,
-      });
+        conceptId: concept?.id,
+        clientDni: clientDni,
+        providerCuit: providerCuit,
+        employeeDni: employeeDni,
+        constructionName: constructionName,
+      };
+
+      reset(formData);
     }
-  }, [movement, reset]);
+  }, [movement, conceptsData, reset]);
 
   useEffect(() => {
     if (!code) {
@@ -103,10 +110,10 @@ export default function EditMovementPage() {
           amount: data.amount,
           paymentMethod: data.paymentMethod,
           conceptId: data.conceptId!,
-          clientId: data.clientId,
-          providerId: data.providerId,
-          employeeId: data.employeeId,
-          constructionId: data.constructionId,
+          clientDni: data.clientDni,
+          providerCuit: data.providerCuit,
+          employeeDni: data.employeeDni,
+          constructionName: data.constructionName,
         },
       },
       {

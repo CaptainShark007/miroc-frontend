@@ -26,7 +26,7 @@ const paymentMethodOptions = [
 const entityConfigs = {
   client: {
     endpoint: '/api/v1/clients',
-    idField: 'id',
+    idField: 'dni',
     labelFields: ['firstName', 'lastName', 'dni'],
     searchParam: 'q',
   },
@@ -55,10 +55,10 @@ export default function CreateMovementFormFields({
   setValue,
 }: CreateMovementFormFieldsProps) {
   const [conceptDialogOpen, setConceptDialogOpen] = useState(false);
-  const clientId = useWatch({ control, name: 'clientId' });
-  const providerId = useWatch({ control, name: 'providerId' });
-  const employeeId = useWatch({ control, name: 'employeeId' });
-  const constructionId = useWatch({ control, name: 'constructionId' });
+  const clientDni = useWatch({ control, name: 'clientDni' });
+  const providerCuit = useWatch({ control, name: 'providerCuit' });
+  const employeeDni = useWatch({ control, name: 'employeeDni' });
+  const constructionName = useWatch({ control, name: 'constructionName' });
 
   const handleCreateConcept = () => {
     setConceptDialogOpen(true);
@@ -149,18 +149,18 @@ export default function CreateMovementFormFields({
           }}
         >
           <FormAutocomplete
-            name='clientId'
+            name='clientDni'
             control={control}
             label='Cliente'
             entityConfig={entityConfigs.client}
-            disabled={!!providerId || !!employeeId || !!constructionId}
+            disabled={!!providerCuit || !!employeeDni || !!constructionName}
             minSearchLength={0}
             debounceTime={300}
             onValueChange={(value) => {
               if (value) {
-                setValue('providerId', null);
-                setValue('employeeId', null);
-                setValue('constructionId', null);
+                setValue('providerCuit', null);
+                setValue('employeeDni', null);
+                setValue('constructionName', null);
               }
             }}
             createNewLabel='Crear nuevo cliente'
@@ -168,18 +168,18 @@ export default function CreateMovementFormFields({
           />
 
           <FormAutocomplete
-            name='providerId'
+            name='providerCuit'
             control={control}
             label='Proveedor'
             entityConfig={entityConfigs.provider}
-            disabled={!!clientId || !!employeeId || !!constructionId}
+            disabled={!!clientDni || !!employeeDni || !!constructionName}
             minSearchLength={0}
             debounceTime={300}
             onValueChange={(value) => {
               if (value) {
-                setValue('clientId', null);
-                setValue('employeeId', null);
-                setValue('constructionId', null);
+                setValue('clientDni', null);
+                setValue('employeeDni', null);
+                setValue('constructionName', null);
               }
             }}
             createNewLabel='Crear nuevo proveedor'
@@ -187,18 +187,18 @@ export default function CreateMovementFormFields({
           />
 
           <FormAutocomplete
-            name='employeeId'
+            name='employeeDni'
             control={control}
             label='Empleado'
             entityConfig={entityConfigs.employee}
-            disabled={!!clientId || !!providerId || !!constructionId}
+            disabled={!!clientDni || !!providerCuit || !!constructionName}
             minSearchLength={0}
             debounceTime={300}
             onValueChange={(value) => {
               if (value) {
-                setValue('clientId', null);
-                setValue('providerId', null);
-                setValue('constructionId', null);
+                setValue('clientDni', null);
+                setValue('providerCuit', null);
+                setValue('constructionName', null);
               }
             }}
             createNewLabel='Crear nuevo empleado'
@@ -206,18 +206,18 @@ export default function CreateMovementFormFields({
           />
 
           <FormAutocomplete
-            name='constructionId'
+            name='constructionName'
             control={control}
             label='Obra'
             entityConfig={entityConfigs.construction}
-            disabled={!!clientId || !!providerId || !!employeeId}
+            disabled={!!clientDni || !!providerCuit || !!employeeDni}
             minSearchLength={0}
             debounceTime={300}
             onValueChange={(value) => {
               if (value) {
-                setValue('clientId', null);
-                setValue('providerId', null);
-                setValue('employeeId', null);
+                setValue('clientDni', null);
+                setValue('providerCuit', null);
+                setValue('employeeDni', null);
               }
             }}
             createNewLabel='Crear nueva obra'

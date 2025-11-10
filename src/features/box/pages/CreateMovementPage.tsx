@@ -26,10 +26,10 @@ export default function CreateMovementPage() {
       amount: 0,
       paymentMethod: PaymentMethod.CASH,
       conceptId: undefined,
-      clientId: null,
-      providerId: null,
-      employeeId: null,
-      constructionId: null,
+      clientDni: null,
+      providerCuit: null,
+      employeeDni: null,
+      constructionName: null,
     },
   });
 
