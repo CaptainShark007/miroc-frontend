@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { CustomCard } from '@shared/components/CustomCard';
 import { LoginHeader } from '../components/LoginHeader';
 import { LoginForm } from '../components/LoginForm';
@@ -7,7 +7,7 @@ import { LoginFormData } from '../schemas/loginSchema';
 import { useLogin } from '../hooks/useLogin';
 
 export default function LoginPage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { mutate: loginUser, isPending: loading } = useLogin();
 
   const handleLogin = async (formData: LoginFormData) => {
@@ -17,9 +17,9 @@ export default function LoginPage() {
     });
   };
 
-  const handleForgotPassword = () => {
-    navigate('/forgot-password');
-  };
+  // const handleForgotPassword = () => {
+  //   navigate('/forgot-password');
+  // };
 
   return (
     <LoginLayout>
@@ -32,7 +32,7 @@ export default function LoginPage() {
         <LoginForm
           onSubmit={handleLogin}
           loading={loading}
-          onForgotPassword={handleForgotPassword}
+          // onForgotPassword={handleForgotPassword}
         />
       </CustomCard>
     </LoginLayout>

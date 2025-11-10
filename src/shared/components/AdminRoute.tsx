@@ -5,7 +5,7 @@ export default function AdminRoute() {
   const { isAdmin } = useAuth();
 
   if (!isAdmin()) {
-    return <Navigate to='/dashboard' replace />;
+    return <Navigate to='/movements' replace />;
   }
 
   return <Outlet />;
