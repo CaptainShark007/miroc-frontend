@@ -40,7 +40,6 @@ export const CreateEmployeePage = lazy(
 export const EditEmployeePage = lazy(
   () => import('@features/employee/pages/EditEmployeePage')
 );
-export const BoxPage = lazy(() => import('@features/box/pages/BoxPage'));
 export const MovementPage = lazy(
   () => import('@features/box/pages/MovementPage')
 );

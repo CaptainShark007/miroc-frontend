@@ -47,12 +47,8 @@ export default function EditMovementPage() {
 
   useEffect(() => {
     if (movement && conceptsData?.data) {
-      console.log('Movement data:', movement);
-      console.log('Available concepts:', conceptsData.data);
-
       const concepts = conceptsData.data;
       const concept = concepts.find((c) => c.name === movement.conceptName);
-      console.log('Found concept:', concept);
 
       const clientDni =
         movement.associatedEntity?.type === 'CLIENTE'
@@ -80,8 +76,6 @@ export default function EditMovementPage() {
         employeeDni: employeeDni,
         constructionName: constructionName,
       };
-
-      console.log('Form data to reset:', formData);
 
       reset(formData);
     }
