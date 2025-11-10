@@ -1,21 +1,13 @@
-import { useProviders } from './useProviders';
+import { useQuery } from '@tanstack/react-query';
+import { getProviderByCuit } from '@features/provider/api/service';
+import { GetProviderResponse } from '@features/provider/types';
 
-export const useProviderByCuit = (providerCuit: number | undefined) => {
-  const {
-    data: providersData,
-    isLoading,
-    error,
-  } = useProviders({
-    pageIndex: 1,
-    pageSize: 1000,
+export const useProviderByCuit = (cuit: number | undefined) => {
+  return useQuery<GetProviderResponse>({
+    queryKey: ['provider', cuit],
+    queryFn: () => getProviderByCuit(cuit!),
+    enabled: !!cuit,
+    staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
   });
-
-  const provider = providersData?.data?.items?.find((p) => p.cuit === providerCuit);
-
-  return {
-    provider,
-    isLoading,
-    error,
-    isProviderFound: !!provider,
-  };
 };

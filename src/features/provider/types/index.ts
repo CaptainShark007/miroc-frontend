@@ -65,3 +65,5 @@ export interface UpdateProviderResponse extends ApiResponse<Provider> {
 }
 
 export interface DeleteProviderResponse extends ApiResponse<Provider> {}
+
+export interface GetProviderResponse extends ApiResponse<Provider> {}
