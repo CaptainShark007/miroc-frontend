@@ -10,7 +10,7 @@ export type JwtPayload = {
   iss?: string;
   role?: 'ADMIN' | 'PRESUPUESTISTA';
   username?: string;
-  permissions?: string[];
+  permission?: string[]; // Cambiado de 'permissions' a 'permission' (singular)
 };
 
 export type AuthRequest = {

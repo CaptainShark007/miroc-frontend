@@ -7,25 +7,25 @@ interface ClientTableRowProps {
   client: Client;
   onEdit: (client: Client) => void;
   onDelete: (client: Client) => void;
+  showActions?: boolean;
 }
 
 export default function ClientTableRow({
   client,
   onEdit,
   onDelete,
+  showActions = true,
 }: ClientTableRowProps) {
   return (
     <>
       <TableCell>{formatDNI(client.dni)}</TableCell>
       <TableCell>{client.firstName}</TableCell>
       <TableCell>{client.address}</TableCell>
-      <TableCell>
-        <ClientActions
-          client={client}
-          onEdit={onEdit}
-          onDelete={onDelete}
-        />
-      </TableCell>
+      {showActions && (
+        <TableCell>
+          <ClientActions client={client} onEdit={onEdit} onDelete={onDelete} />
+        </TableCell>
+      )}
     </>
   );
 }

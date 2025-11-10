@@ -6,6 +6,7 @@ import {
   InputAdornment,
 } from '@mui/material';
 import { HomeWork, AddBusiness, Search } from '@mui/icons-material';
+import { usePermissions } from '@shared/hooks/usePermissions';
 
 interface ConstructionHeaderProps {
   onCreateConstruction?: () => void;
@@ -18,6 +19,9 @@ export default function ConstructionHeader({
   searchQuery,
   onSearchChange,
 }: ConstructionHeaderProps) {
+  const { canCreate } = usePermissions();
+  const canCreateConstruction = canCreate('construction');
+
   return (
     <Box
       sx={{
@@ -58,18 +62,20 @@ export default function ConstructionHeader({
           }}
         />
 
-        <Button
-          variant='contained'
-          startIcon={<AddBusiness />}
-          onClick={onCreateConstruction}
-          sx={{
-            borderRadius: 2,
-            textTransform: 'none',
-            fontWeight: 600,
-          }}
-        >
-          Crear Obra
-        </Button>
+        {canCreateConstruction && (
+          <Button
+            variant='contained'
+            startIcon={<AddBusiness />}
+            onClick={onCreateConstruction}
+            sx={{
+              borderRadius: 2,
+              textTransform: 'none',
+              fontWeight: 600,
+            }}
+          >
+            Crear Obra
+          </Button>
+        )}
       </Box>
     </Box>
   );

@@ -10,6 +10,7 @@ import {
   TableSortLabel,
 } from '@mui/material';
 import { Construction } from '@features/construction/types';
+import { usePermissions } from '@shared/hooks/usePermissions';
 import ConstructionTableRow from './ConstructionTableRow';
 
 interface ConstructionTableProps {
@@ -31,9 +32,14 @@ export default function ConstructionTable({
   sortOrder,
   onSort,
 }: ConstructionTableProps) {
+  const { hasAnyActionPermission } = usePermissions();
+  const showActionsColumn = hasAnyActionPermission('construction');
+
   const createSortHandler = (field: string) => () => {
     onSort(field);
   };
+
+  const colSpan = showActionsColumn ? 7 : 6;
 
   return (
     <TableContainer>
@@ -49,9 +55,7 @@ export default function ConstructionTable({
                 Nombre
               </TableSortLabel>
             </TableCell>
-            <TableCell sx={{ fontWeight: 600 }}>
-              Estado
-            </TableCell>
+            <TableCell sx={{ fontWeight: 600 }}>Estado</TableCell>
             <TableCell sx={{ fontWeight: 600 }}>
               <TableSortLabel
                 active={sortBy === 'start_date'}
@@ -88,21 +92,23 @@ export default function ConstructionTable({
                 DNI Cliente
               </TableSortLabel>
             </TableCell>
-            <TableCell sx={{ fontWeight: 600, textAlign: 'center' }}>
-              Acciones
-            </TableCell>
+            {showActionsColumn && (
+              <TableCell sx={{ fontWeight: 600, textAlign: 'center' }}>
+                Acciones
+              </TableCell>
+            )}
           </TableRow>
         </TableHead>
         <TableBody>
           {isLoading ? (
             <TableRow>
-              <TableCell colSpan={7} sx={{ textAlign: 'center', py: 4 }}>
+              <TableCell colSpan={colSpan} sx={{ textAlign: 'center', py: 4 }}>
                 <CircularProgress />
               </TableCell>
             </TableRow>
           ) : constructions.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={7} sx={{ textAlign: 'center', py: 4 }}>
+              <TableCell colSpan={colSpan} sx={{ textAlign: 'center', py: 4 }}>
                 <Typography color='text.secondary'>
                   No se encontraron obras
                 </Typography>
@@ -118,6 +124,7 @@ export default function ConstructionTable({
                   construction={construction}
                   onEdit={onEdit}
                   onDelete={onDelete}
+                  showActions={showActionsColumn}
                 />
               </TableRow>
             ))

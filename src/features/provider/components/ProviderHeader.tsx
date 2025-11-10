@@ -6,6 +6,7 @@ import {
   InputAdornment,
 } from '@mui/material';
 import { SupervisorAccount, PersonAdd, Search } from '@mui/icons-material';
+import { usePermissions } from '@shared/hooks/usePermissions';
 
 interface ProviderHeaderProps {
   onCreateProvider?: () => void;
@@ -18,6 +19,9 @@ export default function ProviderHeader({
   searchQuery,
   onSearchChange,
 }: ProviderHeaderProps) {
+  const { canCreate } = usePermissions();
+  const canCreateProvider = canCreate('provider');
+
   return (
     <Box
       sx={{
@@ -58,18 +62,20 @@ export default function ProviderHeader({
           }}
         />
 
-        <Button
-          variant='contained'
-          startIcon={<PersonAdd />}
-          onClick={onCreateProvider}
-          sx={{
-            borderRadius: 2,
-            textTransform: 'none',
-            fontWeight: 600,
-          }}
-        >
-          Crear Proveedor
-        </Button>
+        {canCreateProvider && (
+          <Button
+            variant='contained'
+            startIcon={<PersonAdd />}
+            onClick={onCreateProvider}
+            sx={{
+              borderRadius: 2,
+              textTransform: 'none',
+              fontWeight: 600,
+            }}
+          >
+            Crear Proveedor
+          </Button>
+        )}
       </Box>
     </Box>
   );

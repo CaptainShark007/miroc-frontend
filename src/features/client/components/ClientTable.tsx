@@ -10,6 +10,7 @@ import {
   TableSortLabel,
 } from '@mui/material';
 import { Client } from '../types/clientTypes';
+import { usePermissions } from '@shared/hooks/usePermissions';
 import ClientTableRow from './ClientTableRow';
 
 interface ClientTableProps {
@@ -31,9 +32,14 @@ export const ClientTable = ({
   sortOrder,
   onSort,
 }: ClientTableProps) => {
+  const { hasAnyActionPermission } = usePermissions();
+  const showActionsColumn = hasAnyActionPermission('client');
+
   const createSortHandler = (field: string) => () => {
     onSort(field);
   };
+
+  const colSpan = showActionsColumn ? 4 : 3;
 
   return (
     <TableContainer>
@@ -67,21 +73,23 @@ export const ClientTable = ({
                 Dirección
               </TableSortLabel>
             </TableCell>
-            <TableCell sx={{ fontWeight: 600, textAlign: 'center' }}>
-              Acciones
-            </TableCell>
+            {showActionsColumn && (
+              <TableCell sx={{ fontWeight: 600, textAlign: 'center' }}>
+                Acciones
+              </TableCell>
+            )}
           </TableRow>
         </TableHead>
         <TableBody>
           {isLoading ? (
             <TableRow>
-              <TableCell colSpan={4} sx={{ textAlign: 'center', py: 4 }}>
+              <TableCell colSpan={colSpan} sx={{ textAlign: 'center', py: 4 }}>
                 <CircularProgress />
               </TableCell>
             </TableRow>
           ) : clients.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={4} sx={{ textAlign: 'center', py: 4 }}>
+              <TableCell colSpan={colSpan} sx={{ textAlign: 'center', py: 4 }}>
                 <Typography color='text.secondary'>
                   No se encontraron clientes
                 </Typography>
@@ -94,6 +102,7 @@ export const ClientTable = ({
                   client={client}
                   onEdit={onEdit}
                   onDelete={onDelete}
+                  showActions={showActionsColumn}
                 />
               </TableRow>
             ))

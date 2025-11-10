@@ -6,6 +6,7 @@ import {
   InputAdornment,
 } from '@mui/material';
 import { People, PersonAdd, Search } from '@mui/icons-material';
+import { usePermissions } from '@shared/hooks/usePermissions';
 
 interface ClientHeaderProps {
   onCreateClient?: () => void;
@@ -18,6 +19,9 @@ export default function ClientHeader({
   searchQuery,
   onSearchChange,
 }: ClientHeaderProps) {
+  const { canCreate } = usePermissions();
+  const canCreateClient = canCreate('client');
+
   return (
     <Box
       sx={{
@@ -58,18 +62,20 @@ export default function ClientHeader({
           }}
         />
 
-        <Button
-          variant='contained'
-          startIcon={<PersonAdd />}
-          onClick={onCreateClient}
-          sx={{
-            borderRadius: 2,
-            textTransform: 'none',
-            fontWeight: 600,
-          }}
-        >
-          Crear Cliente
-        </Button>
+        {canCreateClient && (
+          <Button
+            variant='contained'
+            startIcon={<PersonAdd />}
+            onClick={onCreateClient}
+            sx={{
+              borderRadius: 2,
+              textTransform: 'none',
+              fontWeight: 600,
+            }}
+          >
+            Crear Cliente
+          </Button>
+        )}
       </Box>
     </Box>
   );

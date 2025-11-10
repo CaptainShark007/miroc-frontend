@@ -7,12 +7,14 @@ interface EmployeeTableRowProps {
   employee: Employee;
   onEdit: (employee: Employee) => void;
   onDelete: (employee: Employee) => void;
+  showActions?: boolean;
 }
 
 export default function EmployeeTableRow({
   employee,
   onEdit,
   onDelete,
+  showActions = true,
 }: EmployeeTableRowProps) {
   return (
     <>
@@ -27,13 +29,15 @@ export default function EmployeeTableRow({
           variant='outlined'
         />
       </TableCell>
-      <TableCell>
-        <EmployeeActions
-          employee={employee}
-          onEdit={onEdit}
-          onDelete={onDelete}
-        />
-      </TableCell>
+      {showActions && (
+        <TableCell>
+          <EmployeeActions
+            employee={employee}
+            onEdit={onEdit}
+            onDelete={onDelete}
+          />
+        </TableCell>
+      )}
     </>
   );
 }
