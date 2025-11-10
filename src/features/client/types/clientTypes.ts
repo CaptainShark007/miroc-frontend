@@ -21,12 +21,6 @@ export interface CreateClientPayload {
   address: string;
 }
 
-export interface UpdateClientPayload {
-  dni: number;
-  firstName: string;
-  address: string;
-}
-
 export interface PatchOperation {
   op: 'replace' | 'add' | 'remove';
   path: string;

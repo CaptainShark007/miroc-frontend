@@ -3,9 +3,6 @@ export { default as ClientHeader } from './components/ClientHeader';
 export { ClientTable } from './components/ClientTable';
 export { default as ClientTableRow } from './components/ClientTableRow';
 export { default as ClientActions } from './components/ClientActions';
-export { ClientForm } from './components/ClientForm';
-export { DeleteClientDialog } from './components/DeleteClientDialog';
-export { PatchClientDialog } from './components/PatchClientDialog';
 
 // Pages
 export { default as ClientAdminPage } from './pages/ClientAdminPage';
@@ -13,12 +10,12 @@ export { default as ClientAdminPage } from './pages/ClientAdminPage';
 // Hooks
 export {
   useClients,
-  useClientByDni,
   useCreateClient,
-  useUpdateClient,
-  usePatchClient,
 } from './hooks/useClients';
+export { useClientByDni } from './hooks/useClientByDni';
 export { useDeleteClient } from './hooks/useDeleteClient';
+export { useClientActions } from './hooks/useClientActions';
+export { useUpdateClient } from './hooks/useUpdateClient';
 
 // Services
 export {
@@ -37,7 +34,6 @@ export type {
   PaginatedResponse,
   PaginationData,
   CreateClientPayload,
-  UpdateClientPayload,
   PatchOperation,
   ApiResponse,
   ApiError,
