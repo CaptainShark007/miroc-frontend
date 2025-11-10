@@ -20,6 +20,7 @@ export const FormTextField = forwardRef<
         <TextField
           {...field}
           {...props}
+          id={name}
           ref={ref}
           variant='outlined'
           fullWidth
