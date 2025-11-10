@@ -6,6 +6,23 @@ interface ConstructionStatusBadgeProps {
   endDate: string | null;
 }
 
+const getStatusColor = (
+  status: string
+): 'info' | 'success' | 'warning' | 'error' | 'default' => {
+  switch (status) {
+    case 'planned':
+      return 'info';
+    case 'in-progress':
+      return 'success';
+    case 'ending-soon':
+      return 'warning';
+    case 'finished':
+      return 'error';
+    default:
+      return 'default';
+  }
+};
+
 export default function ConstructionStatusBadge({
   startDate,
   endDate,
@@ -16,9 +33,9 @@ export default function ConstructionStatusBadge({
     <Chip
       label={statusConfig.label}
       size='small'
+      variant='outlined'
+      color={getStatusColor(statusConfig.status)}
       sx={{
-        backgroundColor: statusConfig.bgColor,
-        color: statusConfig.color,
         fontWeight: 600,
         fontSize: '0.75rem',
         height: '24px',
