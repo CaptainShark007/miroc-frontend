@@ -39,7 +39,7 @@ export default function MovementTableRow({
 
   const getEntityLabel = (entity: Movement['associatedEntity']) => {
     if (!entity) return 'General';
-    return `${entity.type}: ${entity.id}`;
+    return `${entity.type}`;
   };
 
   return (

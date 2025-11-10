@@ -12,10 +12,10 @@ export const createMovementSchema = yup.object({
     .typeError('El concepto debe ser un número válido')
     .required('El concepto es requerido')
     .min(1, 'El concepto es requerido'),
-  clientId: yup.string().nullable(),
-  providerId: yup.string().nullable(),
-  employeeId: yup.string().nullable(),
-  constructionId: yup.string().nullable(),
+  clientDni: yup.number().nullable(),
+  providerCuit: yup.number().nullable(),
+  employeeDni: yup.number().nullable(),
+  constructionName: yup.string().nullable(),
 });
 
 export type CreateMovementFormData = yup.InferType<typeof createMovementSchema>;

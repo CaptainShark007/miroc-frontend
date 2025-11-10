@@ -1,6 +1,6 @@
 export interface AssociatedEntity {
   type: string;
-  id: string;
+  key: number;
 }
 
 export interface Movement {
@@ -29,20 +29,20 @@ export interface CreateMovementRequest {
   amount: number;
   paymentMethod: string;
   conceptId: number;
-  clientId?: string | null;
-  providerId?: string | null;
-  employeeId?: string | null;
-  constructionId?: string | null;
+  clientDni?: number | null;
+  providerCuit?: number | null;
+  employeeDni?: number | null;
+  constructionName?: string | null;
 }
 
 export interface UpdateMovementRequest {
   amount?: number;
   paymentMethod?: string;
   conceptId?: number;
-  clientId?: string | null;
-  providerId?: string | null;
-  employeeId?: string | null;
-  constructionId?: string | null;
+  clientDni?: number | null;
+  providerCuit?: number | null;
+  employeeDni?: number | null;
+  constructionName?: string | null;
 }
 
 export interface PaginationData<T> {
