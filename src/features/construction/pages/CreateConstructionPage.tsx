@@ -22,7 +22,7 @@ export default function CreateConstructionPage() {
     defaultValues: {
       name: '',
       startDate: '',
-      endDate: '',
+      endDate: null,
       address: '',
       description: '',
       clientDni: undefined,
@@ -30,11 +30,17 @@ export default function CreateConstructionPage() {
   });
 
   const onSubmit = (data: CreateConstructionFormData) => {
-    createConstructionMutation.mutate(data, {
-      onSuccess: () => {
-        navigate('/works');
+    createConstructionMutation.mutate(
+      {
+        ...data,
+        endDate: data.endDate || null,
       },
-    });
+      {
+        onSuccess: () => {
+          navigate('/works');
+        },
+      }
+    );
   };
 
   const handleBack = () => {

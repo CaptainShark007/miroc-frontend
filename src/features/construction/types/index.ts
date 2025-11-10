@@ -1,7 +1,7 @@
 export interface Construction {
   name: string;
   startDate: string;
-  endDate: string;
+  endDate: string | null;
   address: string;
   description: string;
   clientDni: number;
@@ -22,7 +22,7 @@ export interface GetConstructionsRequest {
 export interface CreateConstructionRequest {
   name: string;
   startDate: string;
-  endDate: string;
+  endDate: string | null;
   address: string;
   description: string;
   clientDni: number;
@@ -66,4 +66,3 @@ export interface UpdateConstructionResponse extends ApiResponse<Construction> {
 }
 
 export interface DeleteConstructionResponse extends ApiResponse<void> {}
-

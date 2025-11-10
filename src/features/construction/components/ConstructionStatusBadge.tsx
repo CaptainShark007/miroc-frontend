@@ -3,7 +3,7 @@ import { getConstructionStatus } from '@features/construction/utils/construction
 
 interface ConstructionStatusBadgeProps {
   startDate: string;
-  endDate: string;
+  endDate: string | null;
 }
 
 export default function ConstructionStatusBadge({
@@ -15,7 +15,7 @@ export default function ConstructionStatusBadge({
   return (
     <Chip
       label={statusConfig.label}
-      size="small"
+      size='small'
       sx={{
         backgroundColor: statusConfig.bgColor,
         color: statusConfig.color,

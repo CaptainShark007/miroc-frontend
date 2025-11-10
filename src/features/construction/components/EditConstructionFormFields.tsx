@@ -1,10 +1,18 @@
 import { Control } from 'react-hook-form';
 import { FormTextField } from '@shared/components/FormTextField';
+import { FormAutocomplete } from '@shared/components/FormAutocomplete';
 import { EditConstructionFormData } from '@features/construction/schemas/editConstructionSchema';
 
 interface EditConstructionFormFieldsProps {
   control: Control<EditConstructionFormData>;
 }
+
+const clientConfig = {
+  endpoint: '/api/v1/clients',
+  idField: 'dni',
+  labelFields: ['firstName', 'lastName', 'dni'],
+  searchParam: 'q',
+};
 
 export default function EditConstructionFormFields({
   control,
@@ -27,7 +35,7 @@ export default function EditConstructionFormFields({
       <FormTextField
         name='endDate'
         control={control}
-        label='Fecha de Finalización de la Obra *'
+        label='Fecha de Finalización de la Obra'
         type='date'
         InputLabelProps={{ shrink: true }}
       />
@@ -43,11 +51,15 @@ export default function EditConstructionFormFields({
         multiline
         maxRows={4}
       />
-      <FormTextField
+      <FormAutocomplete
         name='clientDni'
         control={control}
-        label='DNI Cliente *'
-        type='number'
+        label='Cliente *'
+        entityConfig={clientConfig}
+        minSearchLength={0}
+        debounceTime={300}
+        createNewLabel='Crear nuevo cliente'
+        createNavigationPath='/admin/clients/create'
       />
     </>
   );

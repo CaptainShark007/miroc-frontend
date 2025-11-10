@@ -42,10 +42,10 @@ export default function EditConstructionPage() {
     defaultValues: {
       name: '',
       startDate: '',
-      endDate: '',
+      endDate: null,
       address: '',
       description: '',
-      clientDni: 0,
+      clientDni: undefined,
     },
   });
 
@@ -54,7 +54,9 @@ export default function EditConstructionPage() {
       reset({
         name: construction.name,
         startDate: formatDateToInput(construction.startDate),
-        endDate: formatDateToInput(construction.endDate),
+        endDate: construction.endDate
+          ? formatDateToInput(construction.endDate)
+          : null,
         address: construction.address,
         description: construction.description,
         clientDni: construction.clientDni,

@@ -13,13 +13,15 @@ export const createConstructionSchema = yup.object().shape({
   startDate: yup.string().required('La fecha de inicio es obligatoria'),
   endDate: yup
     .string()
-    .required('La fecha de fin es obligatoria')
+    .nullable()
+    .notRequired()
     .test(
       'is-after-start',
       'La fecha de fin debe ser posterior a la fecha de inicio',
       function (value) {
         const { startDate } = this.parent;
-        return !startDate || !value || new Date(value) >= new Date(startDate);
+        if (!value) return true; // Si no hay fecha de fin, es válido
+        return !startDate || new Date(value) >= new Date(startDate);
       }
     ),
   address: yup.string().required('La dirección es obligatoria'),
@@ -29,6 +31,7 @@ export const createConstructionSchema = yup.object().shape({
     .default(''),
   clientDni: yup
     .number()
+    .nullable()
     .typeError('El DNI del cliente debe ser un número')
     .required('El DNI del cliente es obligatorio'),
 });

@@ -1,8 +1,8 @@
-export type ConstructionStatus = 
-  | 'planned'      // Planificada - aún no comenzó
-  | 'in-progress'  // En Progreso - obra activa
-  | 'ending-soon'  // Próxima a Finalizar - faltan menos de 7 días
-  | 'finished';    // Finalizada - pasó la fecha de fin
+export type ConstructionStatus =
+  | 'planned' // Planificada - aún no comenzó
+  | 'in-progress' // En Progreso - obra activa
+  | 'ending-soon' // Próxima a Finalizar - faltan menos de 7 días
+  | 'finished'; // Finalizada - pasó la fecha de fin
 
 export interface ConstructionStatusConfig {
   status: ConstructionStatus;
@@ -13,14 +13,32 @@ export interface ConstructionStatusConfig {
 
 export const getConstructionStatus = (
   startDate: string,
-  endDate: string
+  endDate: string | null
 ): ConstructionStatusConfig => {
   const now = new Date();
   now.setHours(0, 0, 0, 0);
-  
+
   const start = new Date(startDate);
   start.setHours(0, 0, 0, 0);
-  
+
+  // Si no hay fecha de fin, la obra está en progreso si ya comenzó, o planificada si no
+  if (!endDate) {
+    if (now < start) {
+      return {
+        status: 'planned',
+        label: 'Planificada',
+        color: '#1976d2',
+        bgColor: '#e3f2fd',
+      };
+    }
+    return {
+      status: 'in-progress',
+      label: 'En Progreso',
+      color: '#2e7d32',
+      bgColor: '#e8f5e9',
+    };
+  }
+
   const end = new Date(endDate);
   end.setHours(0, 0, 0, 0);
 
@@ -45,7 +63,9 @@ export const getConstructionStatus = (
   }
 
   // Calcular días restantes
-  const daysRemaining = Math.ceil((end.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+  const daysRemaining = Math.ceil(
+    (end.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
+  );
 
   // Próxima a finalizar (menos de 7 días)
   if (daysRemaining <= 7) {
