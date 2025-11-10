@@ -5,6 +5,8 @@ import {
   EmployeePage,
   ClientPage,
   ClientAdminPage,
+  CreateClientPage,
+  EditClientPage,
   ProviderPage,
   MovementPage,
   CreateMovementPage,
@@ -52,18 +54,44 @@ export default function Router() {
         <Route path='/dashboard' element={<DashboardPage />} />
         <Route path='/configuration' element={<ConfigurationPage />} />
         <Route path='/entities'>
-          <Route
-            path='clients'
-            element={
-              <PermissionGuard
-                module='client'
-                action='read'
-                moduleName='Clientes'
-              >
-                <ClientPage />
-              </PermissionGuard>
-            }
-          />
+          <Route path='clients'>
+            <Route
+              index
+              element={
+                <PermissionGuard
+                  module='client'
+                  action='read'
+                  moduleName='Clientes'
+                >
+                  <ClientPage />
+                </PermissionGuard>
+              }
+            />
+            <Route
+              path='create'
+              element={
+                <PermissionGuard
+                  module='client'
+                  action='create'
+                  moduleName='Clientes'
+                >
+                  <CreateClientPage />
+                </PermissionGuard>
+              }
+            />
+            <Route
+              path='edit/:dni'
+              element={
+                <PermissionGuard
+                  module='client'
+                  action='update'
+                  moduleName='Clientes'
+                >
+                  <EditClientPage />
+                </PermissionGuard>
+              }
+            />
+          </Route>
           <Route path='suppliers'>
             <Route
               index
