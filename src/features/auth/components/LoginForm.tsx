@@ -1,4 +1,4 @@
-import { Box, Link, Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { LoadingButton } from '@shared/components/LoadingButton';
 import { FormTextField } from '@shared/components/FormTextField';
 import { FormPasswordField } from '@shared/components/FormPasswordField';
@@ -8,14 +8,9 @@ import { loginSchema, LoginFormData } from '../schemas/loginSchema';
 interface LoginFormProps {
   onSubmit: (data: LoginFormData) => void;
   loading?: boolean;
-  onForgotPassword?: () => void;
 }
 
-export const LoginForm = ({
-  onSubmit,
-  loading = false,
-  onForgotPassword,
-}: LoginFormProps) => {
+export const LoginForm = ({ onSubmit, loading = false }: LoginFormProps) => {
   const {
     control,
     handleSubmit,

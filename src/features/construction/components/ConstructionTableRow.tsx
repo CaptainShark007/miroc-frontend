@@ -27,7 +27,9 @@ export default function ConstructionTableRow({
         />
       </TableCell>
       <TableCell>{formatDateToDisplay(construction.startDate)}</TableCell>
-      <TableCell>{formatDateToDisplay(construction.endDate)}</TableCell>
+      <TableCell>
+        {construction.endDate ? formatDateToDisplay(construction.endDate) : '-'}
+      </TableCell>
       <TableCell>{construction.address}</TableCell>
       <TableCell>{formatDNI(construction.clientDni)}</TableCell>
       {showActions && (
