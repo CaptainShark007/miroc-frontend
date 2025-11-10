@@ -6,6 +6,7 @@ import {
   InputAdornment,
 } from '@mui/material';
 import { Group, PersonAdd, Search } from '@mui/icons-material';
+import { usePermissions } from '@shared/hooks/usePermissions';
 
 interface EmployeesHeaderProps {
   onCreateEmployee?: () => void;
@@ -18,6 +19,9 @@ export default function EmployeesHeader({
   searchQuery,
   onSearchChange,
 }: EmployeesHeaderProps) {
+  const { canCreate } = usePermissions();
+  const canCreateEmployee = canCreate('employee');
+
   return (
     <Box
       sx={{
@@ -58,18 +62,20 @@ export default function EmployeesHeader({
           }}
         />
 
-        <Button
-          variant='contained'
-          startIcon={<PersonAdd />}
-          onClick={onCreateEmployee}
-          sx={{
-            borderRadius: 2,
-            textTransform: 'none',
-            fontWeight: 600,
-          }}
-        >
-          Crear Empleado
-        </Button>
+        {canCreateEmployee && (
+          <Button
+            variant='contained'
+            startIcon={<PersonAdd />}
+            onClick={onCreateEmployee}
+            sx={{
+              borderRadius: 2,
+              textTransform: 'none',
+              fontWeight: 600,
+            }}
+          >
+            Crear Empleado
+          </Button>
+        )}
       </Box>
     </Box>
   );

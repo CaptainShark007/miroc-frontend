@@ -28,6 +28,7 @@ import DashboardLayout from '@layout/DashboardLayout';
 import ProtectedRoute from '@shared/components/ProtectedRoute';
 import PublicRoute from '@shared/components/PublicRoute';
 import AdminRoute from '@shared/components/AdminRoute';
+import PermissionGuard from '@shared/components/PermissionGuard';
 
 export default function Router() {
   return (
@@ -51,28 +52,158 @@ export default function Router() {
         <Route path='/dashboard' element={<DashboardPage />} />
         <Route path='/configuration' element={<ConfigurationPage />} />
         <Route path='/entities'>
-          <Route path='clients' element={<ClientPage />} />
-          {/* <Route path='suppliers' element={<ProviderPage />} /> */}
+          <Route
+            path='clients'
+            element={
+              <PermissionGuard
+                module='client'
+                action='read'
+                moduleName='Clientes'
+              >
+                <ClientPage />
+              </PermissionGuard>
+            }
+          />
           <Route path='suppliers'>
-            <Route index element={<ProviderPage />} />
-            <Route path='create' element={<CreateProviderPage />} />
-            <Route path='edit/:cuit' element={<EditProviderPage />} />
+            <Route
+              index
+              element={
+                <PermissionGuard
+                  module='provider'
+                  action='read'
+                  moduleName='Proveedores'
+                >
+                  <ProviderPage />
+                </PermissionGuard>
+              }
+            />
+            <Route
+              path='create'
+              element={
+                <PermissionGuard
+                  module='provider'
+                  action='create'
+                  moduleName='Proveedores'
+                >
+                  <CreateProviderPage />
+                </PermissionGuard>
+              }
+            />
+            <Route
+              path='edit/:cuit'
+              element={
+                <PermissionGuard
+                  module='provider'
+                  action='update'
+                  moduleName='Proveedores'
+                >
+                  <EditProviderPage />
+                </PermissionGuard>
+              }
+            />
           </Route>
           <Route path='employees'>
-            <Route index element={<EmployeePage />} />
-            <Route path='create' element={<CreateEmployeePage />} />
-            <Route path='edit/:dni' element={<EditEmployeePage />} />
+            <Route
+              index
+              element={
+                <PermissionGuard
+                  module='employee'
+                  action='read'
+                  moduleName='Empleados'
+                >
+                  <EmployeePage />
+                </PermissionGuard>
+              }
+            />
+            <Route
+              path='create'
+              element={
+                <PermissionGuard
+                  module='employee'
+                  action='create'
+                  moduleName='Empleados'
+                >
+                  <CreateEmployeePage />
+                </PermissionGuard>
+              }
+            />
+            <Route
+              path='edit/:dni'
+              element={
+                <PermissionGuard
+                  module='employee'
+                  action='update'
+                  moduleName='Empleados'
+                >
+                  <EditEmployeePage />
+                </PermissionGuard>
+              }
+            />
           </Route>
         </Route>
         <Route path='movements'>
-          <Route index element={<MovementPage />} />
-          <Route path='create' element={<CreateMovementPage />} />
-          <Route path='edit/:code' element={<EditMovementPage />} />
+          <Route
+            index
+            element={
+              <PermissionGuard module='box' action='read' moduleName='Caja'>
+                <MovementPage />
+              </PermissionGuard>
+            }
+          />
+          <Route
+            path='create'
+            element={
+              <PermissionGuard module='box' action='create' moduleName='Caja'>
+                <CreateMovementPage />
+              </PermissionGuard>
+            }
+          />
+          <Route
+            path='edit/:code'
+            element={
+              <PermissionGuard module='box' action='update' moduleName='Caja'>
+                <EditMovementPage />
+              </PermissionGuard>
+            }
+          />
         </Route>
         <Route path='/works'>
-          <Route index element={<ConstructionPage />} />
-          <Route path='create' element={<CreateConstructionPage />} />
-          <Route path='edit/:nombre' element={<EditConstructionPage />} />
+          <Route
+            index
+            element={
+              <PermissionGuard
+                module='construction'
+                action='read'
+                moduleName='Obras'
+              >
+                <ConstructionPage />
+              </PermissionGuard>
+            }
+          />
+          <Route
+            path='create'
+            element={
+              <PermissionGuard
+                module='construction'
+                action='create'
+                moduleName='Obras'
+              >
+                <CreateConstructionPage />
+              </PermissionGuard>
+            }
+          />
+          <Route
+            path='edit/:nombre'
+            element={
+              <PermissionGuard
+                module='construction'
+                action='update'
+                moduleName='Obras'
+              >
+                <EditConstructionPage />
+              </PermissionGuard>
+            }
+          />
         </Route>
         <Route path='/stock' element={<StockPage />} />
         <Route path='/reports' element={<ReportsPage />} />
@@ -82,7 +213,18 @@ export default function Router() {
             <Route path='users' element={<UserAdminPage />} />
             <Route path='users/create' element={<CreateUserPage />} />
             <Route path='users/edit/:id' element={<EditUserPage />} />
-            <Route path='clients' element={<ClientAdminPage />} />
+            <Route
+              path='clients'
+              element={
+                <PermissionGuard
+                  module='client'
+                  action='read'
+                  moduleName='Clientes'
+                >
+                  <ClientAdminPage />
+                </PermissionGuard>
+              }
+            />
           </Route>
         </Route>
       </Route>

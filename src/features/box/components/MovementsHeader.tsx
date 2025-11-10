@@ -6,6 +6,7 @@ import {
   InputAdornment,
 } from '@mui/material';
 import { AccountBalance, Add, Search, Category } from '@mui/icons-material';
+import { usePermissions } from '@shared/hooks/usePermissions';
 
 interface MovementsHeaderProps {
   onCreateMovement?: () => void;
@@ -28,6 +29,9 @@ export default function MovementsHeader({
   onDateFromChange,
   onDateToChange,
 }: MovementsHeaderProps) {
+  const { canCreate } = usePermissions();
+  const canCreateMovement = canCreate('box');
+
   return (
     <Box
       sx={{
@@ -60,31 +64,35 @@ export default function MovementsHeader({
         </Box>
 
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-          <Button
-            variant='outlined'
-            startIcon={<Category />}
-            onClick={onManageConcepts}
-            sx={{
-              borderRadius: 2,
-              textTransform: 'none',
-              fontWeight: 600,
-            }}
-          >
-            Conceptos
-          </Button>
+          {canCreateMovement && (
+            <>
+              <Button
+                variant='outlined'
+                startIcon={<Category />}
+                onClick={onManageConcepts}
+                sx={{
+                  borderRadius: 2,
+                  textTransform: 'none',
+                  fontWeight: 600,
+                }}
+              >
+                Conceptos
+              </Button>
 
-          <Button
-            variant='contained'
-            startIcon={<Add />}
-            onClick={onCreateMovement}
-            sx={{
-              borderRadius: 2,
-              textTransform: 'none',
-              fontWeight: 600,
-            }}
-          >
-            Crear Movimiento
-          </Button>
+              <Button
+                variant='contained'
+                startIcon={<Add />}
+                onClick={onCreateMovement}
+                sx={{
+                  borderRadius: 2,
+                  textTransform: 'none',
+                  fontWeight: 600,
+                }}
+              >
+                Crear Movimiento
+              </Button>
+            </>
+          )}
         </Box>
       </Box>
 

@@ -8,18 +8,20 @@ interface ConstructionTableRowProps {
   construction: Construction;
   onEdit: (construction: Construction) => void;
   onDelete: (construction: Construction) => void;
+  showActions?: boolean;
 }
 
 export default function ConstructionTableRow({
   construction,
   onEdit,
   onDelete,
+  showActions = true,
 }: ConstructionTableRowProps) {
   return (
     <>
       <TableCell>{construction.name}</TableCell>
       <TableCell>
-        <ConstructionStatusBadge 
+        <ConstructionStatusBadge
           startDate={construction.startDate}
           endDate={construction.endDate}
         />
@@ -28,13 +30,15 @@ export default function ConstructionTableRow({
       <TableCell>{formatDateToDisplay(construction.endDate)}</TableCell>
       <TableCell>{construction.address}</TableCell>
       <TableCell>{formatDNI(construction.clientDni)}</TableCell>
-      <TableCell sx={{ textAlign: 'center' }}>
-        <ConstructionActions
-          construction={construction}
-          onEdit={onEdit}
-          onDelete={onDelete}
-        />
-      </TableCell>
+      {showActions && (
+        <TableCell sx={{ textAlign: 'center' }}>
+          <ConstructionActions
+            construction={construction}
+            onEdit={onEdit}
+            onDelete={onDelete}
+          />
+        </TableCell>
+      )}
     </>
   );
 }

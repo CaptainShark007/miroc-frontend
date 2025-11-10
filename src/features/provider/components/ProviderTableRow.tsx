@@ -7,12 +7,14 @@ interface ProviderTableRowProps {
   provider: Provider;
   onEdit: (provider: Provider) => void;
   onDelete: (provider: Provider) => void;
+  showActions?: boolean;
 }
 
 export default function ProviderTableRow({
   provider,
   onEdit,
   onDelete,
+  showActions = true,
 }: ProviderTableRowProps) {
   return (
     <>
@@ -20,13 +22,15 @@ export default function ProviderTableRow({
       <TableCell>{provider.firstName}</TableCell>
       <TableCell>{provider.description}</TableCell>
       <TableCell>{provider.address}</TableCell>
-      <TableCell>
-        <ProviderActions
-          provider={provider}
-          onEdit={onEdit}
-          onDelete={onDelete}
-        />
-      </TableCell>
+      {showActions && (
+        <TableCell>
+          <ProviderActions
+            provider={provider}
+            onEdit={onEdit}
+            onDelete={onDelete}
+          />
+        </TableCell>
+      )}
     </>
   );
 }

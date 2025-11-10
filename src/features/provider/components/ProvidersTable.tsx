@@ -10,6 +10,7 @@ import {
   TableSortLabel,
 } from '@mui/material';
 import { Provider } from '@/features/provider/types';
+import { usePermissions } from '@shared/hooks/usePermissions';
 import ProviderTableRow from './ProviderTableRow';
 
 interface ProvidersTableProps {
@@ -31,9 +32,14 @@ export default function ProvidersTable({
   sortOrder,
   onSort,
 }: ProvidersTableProps) {
+  const { hasAnyActionPermission } = usePermissions();
+  const showActionsColumn = hasAnyActionPermission('provider');
+
   const createSortHandler = (field: string) => () => {
     onSort(field);
   };
+
+  const colSpan = showActionsColumn ? 5 : 4;
 
   return (
     <TableContainer>
@@ -76,22 +82,24 @@ export default function ProvidersTable({
                 Dirección
               </TableSortLabel>
             </TableCell>
-            <TableCell sx={{ fontWeight: 600, textAlign: 'center' }}>
-              Acciones
-            </TableCell>
+            {showActionsColumn && (
+              <TableCell sx={{ fontWeight: 600, textAlign: 'center' }}>
+                Acciones
+              </TableCell>
+            )}
           </TableRow>
         </TableHead>
         <TableBody>
           {isLoading ? (
             <TableRow>
-              <TableCell colSpan={5} sx={{ textAlign: 'center', py: 4 }}>
+              <TableCell colSpan={colSpan} sx={{ textAlign: 'center', py: 4 }}>
                 <CircularProgress />
               </TableCell>
             </TableRow>
           ) : providers.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={5} sx={{ textAlign: 'center', py: 4 }}>
-                <Typography color="text.secondary">
+              <TableCell colSpan={colSpan} sx={{ textAlign: 'center', py: 4 }}>
+                <Typography color='text.secondary'>
                   No se encontraron proveedores
                 </Typography>
               </TableCell>
@@ -103,6 +111,7 @@ export default function ProvidersTable({
                   provider={provider}
                   onEdit={onEdit}
                   onDelete={onDelete}
+                  showActions={showActionsColumn}
                 />
               </TableRow>
             ))

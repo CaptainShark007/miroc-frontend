@@ -10,6 +10,7 @@ import {
   TableSortLabel,
 } from '@mui/material';
 import { Employee } from '@features/employee/types';
+import { usePermissions } from '@shared/hooks/usePermissions';
 import EmployeeTableRow from './EmployeeTableRow';
 
 interface EmployeesTableProps {
@@ -31,9 +32,14 @@ export default function EmployeesTable({
   sortOrder,
   onSort,
 }: EmployeesTableProps) {
+  const { hasAnyActionPermission } = usePermissions();
+  const showActionsColumn = hasAnyActionPermission('employee');
+
   const createSortHandler = (field: string) => () => {
     onSort(field);
   };
+
+  const colSpan = showActionsColumn ? 5 : 4;
 
   return (
     <TableContainer>
@@ -76,21 +82,23 @@ export default function EmployeesTable({
                 Puesto
               </TableSortLabel>
             </TableCell>
-            <TableCell sx={{ fontWeight: 600, textAlign: 'center' }}>
-              Acciones
-            </TableCell>
+            {showActionsColumn && (
+              <TableCell sx={{ fontWeight: 600, textAlign: 'center' }}>
+                Acciones
+              </TableCell>
+            )}
           </TableRow>
         </TableHead>
         <TableBody>
           {isLoading ? (
             <TableRow>
-              <TableCell colSpan={5} sx={{ textAlign: 'center', py: 4 }}>
+              <TableCell colSpan={colSpan} sx={{ textAlign: 'center', py: 4 }}>
                 <CircularProgress />
               </TableCell>
             </TableRow>
           ) : employees.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={5} sx={{ textAlign: 'center', py: 4 }}>
+              <TableCell colSpan={colSpan} sx={{ textAlign: 'center', py: 4 }}>
                 <Typography color='text.secondary'>
                   No se encontraron empleados
                 </Typography>
@@ -103,6 +111,7 @@ export default function EmployeesTable({
                   employee={employee}
                   onEdit={onEdit}
                   onDelete={onDelete}
+                  showActions={showActionsColumn}
                 />
               </TableRow>
             ))
