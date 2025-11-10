@@ -84,6 +84,15 @@ export interface UpdateMovementResponse extends ApiResponse<Movement> {
 
 export interface DeleteMovementResponse extends ApiResponse<null> {}
 
+export interface MovementsSummary {
+  totalIncome: number;
+  totalExpense: number;
+  netBalance: number;
+}
+
+export interface GetMovementsSummaryResponse
+  extends ApiResponse<MovementsSummary> {}
+
 export enum PaymentMethod {
   CREDIT_CARD = 'CREDIT_CARD',
   DEBIT_CARD = 'DEBIT_CARD',

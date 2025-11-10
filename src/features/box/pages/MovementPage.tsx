@@ -12,6 +12,7 @@ import MovementsHeader from '@features/box/components/MovementsHeader';
 import MovementsTable from '@features/box/components/MovementsTable';
 import ConceptManagementModal from '@features/box/components/ConceptManagementModal';
 import MovementDetailDialog from '@features/box/components/MovementDetailDialog';
+import MovementsSummaryCards from '@features/box/components/MovementsSummaryCards';
 
 export default function MovementPage() {
   const [page, setPage] = useState(0);
@@ -131,6 +132,8 @@ export default function MovementPage() {
         onDateFromChange={handleDateFromChange}
         onDateToChange={handleDateToChange}
       />
+
+      <MovementsSummaryCards />
 
       <Paper
         sx={{
