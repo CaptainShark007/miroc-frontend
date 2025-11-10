@@ -11,6 +11,7 @@ import Tooltip from '@shared/components/Tooltip';
 import { useAuth } from '@shared/hooks/useAuth';
 import UserPermissionsModal from '@features/admin/components/UserPermissionsModal';
 import { useUserActions } from '@features/admin/hooks/useUserActions';
+import LogoPng from '@assets/logo.png';
 
 interface DashboardHeaderProps {
   onMenuClick: () => void;
@@ -61,9 +62,24 @@ export default function DashboardHeader({
             >
               <MenuIcon />
             </IconButton>
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-              <Typography variant='h6' fontWeight={700}>
-                LOGO
+            <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center', gap: 1.5 }}>
+              <img 
+                src={LogoPng} 
+                alt='NEXOBRA Logo' 
+                style={{ height: '50px', width: 'auto' }}
+              />
+              <Typography 
+                variant='h5' 
+                fontWeight={700}
+                sx={{ 
+                  letterSpacing: 1.5,
+                  background: 'linear-gradient(135deg, #1565C0 0%, #43A047 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}
+              >
+                NEXOBRAS
               </Typography>
             </Box>
           </Box>
