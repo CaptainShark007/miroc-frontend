@@ -10,8 +10,13 @@ export const useDeleteMovement = () => {
 
   return useMutation<DeleteMovementResponse, ErrorResponse, number>({
     mutationFn: (code: number) => deleteMovement(code),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['movements'] });
+    onSuccess: async () => {
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ['movements'] }),
+        queryClient.invalidateQueries({ queryKey: ['movements-summary'] }),
+        queryClient.invalidateQueries({ queryKey: ['movementsSummary'] }),
+        queryClient.invalidateQueries({ queryKey: ['recentMovements'] }),
+      ]);
       showToast('Movimiento eliminado exitosamente', 'success');
     },
     onError: (error) => {

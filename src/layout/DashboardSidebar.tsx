@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, Box } from '@mui/material';
 import {
-  // Home,
+  Home,
   PointOfSale,
   People,
   // Inventory,
@@ -32,7 +32,7 @@ interface DashboardSidebarProps {
 }
 
 const menuItems = [
-  // { text: 'Panel', icon: <Home />, path: '/dashboard' },
+  { text: 'Inicio', icon: <Home />, path: '/dashboard' },
   { text: 'Entidades', icon: <People /> },
   { text: 'Caja', icon: <PointOfSale />, path: '/movements' },
   { text: 'Obras', icon: <Construction />, path: '/works' },
@@ -43,7 +43,7 @@ const menuItems = [
 const entitiesPopupItems: PopupMenuItem[] = [
   {
     text: 'Clientes',
-    path: '/admin/clients',
+    path: '/entities/clients',
   },
   {
     text: 'Proveedores',

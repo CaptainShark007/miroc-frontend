@@ -17,8 +17,13 @@ export const useCreateMovement = () => {
     CreateMovementRequest
   >({
     mutationFn: createMovement,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['movements'] });
+    onSuccess: async () => {
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ['movements'] }),
+        queryClient.invalidateQueries({ queryKey: ['movements-summary'] }),
+        queryClient.invalidateQueries({ queryKey: ['movementsSummary'] }),
+        queryClient.invalidateQueries({ queryKey: ['recentMovements'] }),
+      ]);
       showToast('Movimiento creado exitosamente', 'success');
     },
     onError: (error) => {
