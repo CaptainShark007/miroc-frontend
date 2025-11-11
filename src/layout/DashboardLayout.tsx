@@ -53,7 +53,8 @@ export default function DashboardLayout({ window }: DashboardLayoutProps) {
           flexGrow: 1,
           width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
           mt: `${HEADER_HEIGHT}px`,
-          py: 4,
+          height: `calc(100vh - ${HEADER_HEIGHT}px)`,
+          overflow: 'auto',
         }}
       >
         <Outlet />
