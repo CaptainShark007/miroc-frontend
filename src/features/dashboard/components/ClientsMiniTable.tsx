@@ -47,8 +47,16 @@ export default function ClientsMiniTable({
 
   return (
     <Box>
-      <TableContainer component={Paper} sx={{ border: 1, borderColor: 'divider' }}>
-        <Table>
+      <TableContainer 
+        component={Paper} 
+        sx={{ 
+          border: 1, 
+          borderColor: 'divider',
+          maxHeight: 380,
+          overflow: 'auto',
+        }}
+      >
+        <Table stickyHeader>
           <TableHead>
             <TableRow>
               <TableCell>
