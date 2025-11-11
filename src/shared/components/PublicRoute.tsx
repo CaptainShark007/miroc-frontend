@@ -10,7 +10,7 @@ export default function PublicRoute({ children }: PublicRouteProps) {
   const token = useAppSelector((state) => state.auth.token);
 
   if (token) {
-    return <Navigate to='/movements' replace />;
+    return <Navigate to='/dashboard' replace />;
   }
 
   return <>{children}</>;

@@ -62,7 +62,7 @@ export default function NoPermissions({ moduleName }: NoPermissionsProps) {
 
         <Button
           variant='contained'
-          onClick={() => navigate('/movements')}
+          onClick={() => navigate('/dashboard')}
           sx={{
             borderRadius: 2,
             textTransform: 'none',
