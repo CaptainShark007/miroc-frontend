@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Paper } from '@mui/material';
+import { useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@shared/hooks/useToast';
 import { useDebounce } from '@shared/hooks/useDebounce';
 import { useMovements } from '@features/box/hooks/useMovements';
@@ -33,6 +34,7 @@ export default function MovementPage() {
 
   const { showToast } = useToast();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const debouncedSearch = useDebounce(searchQuery, 500);
   const debouncedDateFrom = useDebounce(dateFrom, 500);
@@ -55,6 +57,11 @@ export default function MovementPage() {
     handleCancelDelete,
     isDeleting,
   } = useMovementActions();
+
+  useEffect(() => {
+    queryClient.invalidateQueries({ queryKey: ['movements'] });
+    queryClient.invalidateQueries({ queryKey: ['movements-summary'] });
+  }, [queryClient]);
 
   React.useEffect(() => {
     if (error) {

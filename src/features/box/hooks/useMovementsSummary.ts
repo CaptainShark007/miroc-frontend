@@ -6,7 +6,8 @@ export const useMovementsSummary = () => {
   return useQuery<GetMovementsSummaryResponse>({
     queryKey: ['movements-summary'],
     queryFn: getMovementsSummary,
-    staleTime: 1 * 60 * 1000,
+    staleTime: 0,
+    refetchOnMount: true,
     refetchOnWindowFocus: true,
   });
 };

@@ -17,9 +17,14 @@ export const useUpdateMovement = () => {
     { code: number; data: CreateMovementRequest }
   >({
     mutationFn: ({ code, data }) => updateMovement(code, data),
-    onSuccess: (response, variables) => {
-      queryClient.invalidateQueries({ queryKey: ['movements'] });
-      queryClient.invalidateQueries({ queryKey: ['movement', variables.code] });
+    onSuccess: async (response, variables) => {
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ['movements'] }),
+        queryClient.invalidateQueries({ queryKey: ['movements-summary'] }),
+        queryClient.invalidateQueries({ queryKey: ['movementsSummary'] }),
+        queryClient.invalidateQueries({ queryKey: ['recentMovements'] }),
+        queryClient.invalidateQueries({ queryKey: ['movement', variables.code] }),
+      ]);
       const movement = response.data;
       if (movement) {
         showToast('Movimiento actualizado exitosamente', 'success');

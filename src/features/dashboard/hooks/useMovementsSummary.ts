@@ -13,8 +13,9 @@ export const useMovementsSummary = () => {
   return useQuery({
     queryKey: ['movementsSummary'],
     queryFn: getMovementsSummary,
-    staleTime: 1 * 60 * 1000,
-    refetchOnWindowFocus: false,
+    staleTime: 0,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
     placeholderData: (previousData) => previousData,
   });
 };

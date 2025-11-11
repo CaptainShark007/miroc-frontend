@@ -1,4 +1,6 @@
 import { Box, Typography, Paper } from '@mui/material';
+import { useEffect } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import {
   TrendingUp,
   TrendingDown,
@@ -14,10 +16,16 @@ import ClientsMiniTable from '@features/dashboard/components/ClientsMiniTable';
 import ConstructionCalendar from '@features/dashboard/components/ConstructionCalendar';
 
 export default function DashboardPage() {
+  const queryClient = useQueryClient();
   const { data: summaryResponse, isLoading: summaryLoading } = useMovementsSummary();
   const { data: movementsResponse, isLoading: movementsLoading } = useRecentMovements();
   const { data: clientsResponse, isLoading: clientsLoading } = useClientsSummary();
   const { data: constructionsResponse, isLoading: constructionsLoading } = useConstructionsCalendar();
+
+  useEffect(() => {
+    queryClient.invalidateQueries({ queryKey: ['movementsSummary'] });
+    queryClient.invalidateQueries({ queryKey: ['recentMovements'] });
+  }, [queryClient]);
 
   const summary = summaryResponse?.data;
   const movements = movementsResponse?.data?.items || [];

@@ -18,8 +18,9 @@ export const useRecentMovements = () => {
   return useQuery({
     queryKey: ['recentMovements'],
     queryFn: getRecentMovements,
-    staleTime: 1 * 60 * 1000,
-    refetchOnWindowFocus: false,
+    staleTime: 0,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
     placeholderData: (previousData) => previousData,
   });
 };
