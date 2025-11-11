@@ -17,11 +17,11 @@ import type { User } from '@features/admin/types';
 
 export default function EditUserPage() {
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
+  const { dni } = useParams<{ dni: string }>();
   const updateUserMutation = useUpdateUser();
   const { showToast } = useToast();
 
-  const { user, isLoading, error } = useUserById(id);
+  const { user, isLoading, error } = useUserById(dni);
 
   const {
     control,
@@ -54,8 +54,8 @@ export default function EditUserPage() {
   }, [user, reset]);
 
   useEffect(() => {
-    if (!id) {
-      showToast('ID de usuario no válido', 'error');
+    if (!dni) {
+      showToast('DNI de usuario no válido', 'error');
       navigate('/admin/users');
       return;
     }
@@ -66,11 +66,11 @@ export default function EditUserPage() {
       return;
     }
 
-    if (!isLoading && !user && id) {
-      showToast(`Usuario con ID "${id}" no encontrado`, 'error');
+    if (!isLoading && !user && dni) {
+      showToast(`Usuario con DNI "${dni}" no encontrado`, 'error');
       navigate('/admin/users');
     }
-  }, [id, user, isLoading, error, navigate, showToast]);
+  }, [dni, user, isLoading, error, navigate, showToast]);
 
   const onSubmit = (data: EditUserFormData) => {
     if (!user) return;

@@ -240,7 +240,7 @@ export default function Router() {
           <Route element={<AdminRoute />}>
             <Route path='users' element={<UserAdminPage />} />
             <Route path='users/create' element={<CreateUserPage />} />
-            <Route path='users/edit/:id' element={<EditUserPage />} />
+            <Route path='users/edit/:dni' element={<EditUserPage />} />
             <Route
               path='clients'
               element={

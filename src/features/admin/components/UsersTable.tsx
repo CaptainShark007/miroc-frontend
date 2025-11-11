@@ -57,7 +57,7 @@ export default function UsersTable({
             </TableRow>
           ) : (
             users.map((user: User) => (
-              <TableRow key={user.id} hover>
+              <TableRow key={user.dni} hover>
                 <UserTableRow user={user} onEdit={onEdit} onDelete={onDelete} />
               </TableRow>
             ))

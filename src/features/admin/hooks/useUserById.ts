@@ -1,6 +1,6 @@
 import { useUsers } from './useUsers';
 
-export const useUserById = (userId: string | undefined) => {
+export const useUserById = (userDni: string | undefined) => {
   const {
     data: usersData,
     isLoading,
@@ -10,7 +10,7 @@ export const useUserById = (userId: string | undefined) => {
     pageSize: 1000,
   });
 
-  const user = usersData?.data?.items?.find((u) => u.id === userId);
+  const user = usersData?.data?.items?.find((u) => u.dni.toString() === userDni);
 
   return {
     user,

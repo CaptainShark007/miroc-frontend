@@ -28,6 +28,17 @@ const getStatusColor = (status: string) => {
   return status.toLowerCase() === 'active' ? 'success' : 'error';
 };
 
+const formatStatus = (status: string) => {
+  switch (status.toUpperCase()) {
+    case 'ACTIVE':
+      return 'Activo';
+    case 'INACTIVE':
+      return 'Inactivo';
+    default:
+      return status;
+  }
+};
+
 export default function UserTableRow({
   user,
   onEdit,
@@ -49,7 +60,7 @@ export default function UserTableRow({
       </TableCell>
       <TableCell>
         <Chip
-          label={user.status}
+          label={formatStatus(user.status)}
           color={getStatusColor(user.status) as any}
           size='small'
           variant='filled'

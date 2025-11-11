@@ -36,12 +36,12 @@ export const useUserActions = (): UseUserActionsReturn => {
   const deleteUserMutation = useDeleteUser();
 
   const handleEdit = (user: User) => {
-    if (!user.id) {
-      showToast('Error: ID de usuario no válido', 'error');
+    if (user.dni === null || user.dni === undefined) {
+      showToast('Error: DNI de usuario no válido', 'error');
       return;
     }
 
-    navigate(`/admin/users/edit/${user.id}`);
+    navigate(`/admin/users/edit/${user.dni}`);
   };
 
   const handleDelete = (user: User) => {
