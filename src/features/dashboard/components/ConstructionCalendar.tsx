@@ -66,9 +66,13 @@ export default function ConstructionCalendar({
           maxHeight: 380,
           overflow: 'auto',
           pr: 0.5,
+          border: 1,
+          borderColor: 'divider',
+          borderRadius: 1,
+          p: 1.5,
         }}
       >
-      {constructions.slice(0, 6).map((construction, index) => {
+      {constructions.map((construction, index) => {
         const status = getConstructionStatus(construction.startDate, construction.endDate);
         return (
           <Box
