@@ -26,6 +26,9 @@ import {
   Person,
   Groups,
   Save,
+  SwapVert,
+  Construction,
+  Business,
 } from '@mui/icons-material';
 import { useRoles } from '@features/admin/hooks/useRoles';
 import { useUpdateRole } from '@features/admin/hooks/useUpdateRole';
@@ -52,6 +55,10 @@ interface PermissionChange {
 const moduleIcons: Record<string, React.ReactNode> = {
   usuario: <Person />,
   cliente: <Groups />,
+  empleado: <Person />,
+  proveedor: <Business />,
+  movimiento: <SwapVert />,
+  obra: <Construction />,
 };
 
 export default function UserPermissionsModal({
@@ -67,9 +74,22 @@ export default function UserPermissionsModal({
   const { data: rolesData, isLoading, error } = useRoles(isAdmin());
   const updateRoleMutation = useUpdateRole();
 
+  // Mantener los datos originales del backend para verificar permisos
+  const originalRoles = rolesData?.data || [];
   const roles: UIRole[] = rolesData?.data
     ? rolesData.data.map(convertAPIRoleToFrontend)
     : [];
+
+  // Helper para verificar si un permiso existe en los datos originales del backend
+  const isPermissionInOriginalRole = (
+    originalRole: { name: string; permissions: APIPermission[] },
+    moduleId: string,
+    permissionId: string
+  ): boolean => {
+    const apiPermission = convertPermissionChangesToAPI(moduleId, permissionId);
+    return originalRole.permissions.includes(apiPermission);
+  };
+
   const handleRoleChange =
     (roleId: string) => (_: React.SyntheticEvent, isExpanded: boolean) => {
       setExpandedRole(isExpanded ? roleId : false);
@@ -80,13 +100,15 @@ export default function UserPermissionsModal({
     moduleId: string,
     permissionId: string
   ) => {
-    const role = roles.find((r) => r.id === roleId);
-    if (!role) return;
+    // Verificar el permiso contra los datos originales del backend
+    const originalRole = originalRoles.find((r) => r.name === roleId);
+    if (!originalRole) return;
 
-    const module = role.modules.find((m) => m.id === moduleId);
-    if (!module) return;
-
-    const hasPermission = module.permissions.some((p) => p.id === permissionId);
+    const hasPermission = isPermissionInOriginalRole(
+      originalRole,
+      moduleId,
+      permissionId
+    );
 
     setPendingChanges((prev) => {
       const roleChanges = prev[roleId] || [];
@@ -122,13 +144,17 @@ export default function UserPermissionsModal({
     moduleId: string,
     permissionId: string
   ): boolean => {
-    const role = roles.find((r) => r.id === roleId);
-    if (!role) return false;
+    // Verificar contra los datos originales del backend
+    const originalRole = originalRoles.find((r) => r.name === roleId);
+    if (!originalRole) return false;
 
-    const module = role.modules.find((m) => m.id === moduleId);
-    const hasPermission =
-      module?.permissions.some((p) => p.id === permissionId) || false;
+    const hasPermission = isPermissionInOriginalRole(
+      originalRole,
+      moduleId,
+      permissionId
+    );
 
+    // Verificar si hay cambios pendientes
     const roleChanges = pendingChanges[roleId] || [];
     const pendingChange = roleChanges.find(
       (c) => c.moduleId === moduleId && c.permissionId === permissionId
