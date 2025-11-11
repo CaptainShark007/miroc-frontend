@@ -4,16 +4,21 @@ import { FormTextField } from '@shared/components/FormTextField';
 import { FormPasswordField } from '@shared/components/FormPasswordField';
 import { FormSelectField } from '@shared/components/FormSelectField';
 import { EditUserFormData } from '@features/admin/schemas/editUserSchema';
+import { User } from '@features/admin/types';
 
 interface EditUserFormFieldsProps {
   control: Control<EditUserFormData>;
+  user: User;
 }
 
 const userRoles = [{ value: 'PRESUPUESTISTA', label: 'Presupuestista' }];
 
 export default function EditUserFormFields({
   control,
+  user,
 }: EditUserFormFieldsProps) {
+  const isAdmin = user.role.toUpperCase() === 'ADMIN';
+
   return (
     <>
       <FormTextField name='dni' control={control} label='DNI *' type='number' />
@@ -48,7 +53,10 @@ export default function EditUserFormFields({
         name='role'
         control={control}
         label='Rol *'
-        options={userRoles}
+        options={
+          isAdmin ? [{ value: 'ADMIN', label: 'Administrador' }] : userRoles
+        }
+        disabled={isAdmin}
       />
     </>
   );

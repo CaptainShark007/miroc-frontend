@@ -145,7 +145,7 @@ export default function EditUserPage() {
             gap: 3,
           }}
         >
-          <EditUserFormFields control={control} />
+          <EditUserFormFields control={control} user={user} />
           <EditUserActions
             onCancel={handleBack}
             isLoading={updateUserMutation.isPending}

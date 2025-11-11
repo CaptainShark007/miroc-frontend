@@ -31,7 +31,7 @@ export const editUserSchema = yup.object({
   role: yup
     .string()
     .required('El rol es requerido')
-    .oneOf(['PRESUPUESTISTA'], 'Rol no válido'),
+    .oneOf(['PRESUPUESTISTA', 'ADMIN'], 'Rol no válido'),
 });
 
 export type EditUserFormData = yup.InferType<typeof editUserSchema>;

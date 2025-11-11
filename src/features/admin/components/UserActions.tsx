@@ -14,6 +14,8 @@ export default function UserActions({
   onEdit,
   onDelete,
 }: UserActionsProps) {
+  const isAdmin = user.role.toUpperCase() === 'ADMIN';
+
   return (
     <Box
       sx={{
@@ -32,16 +34,18 @@ export default function UserActions({
           <Edit fontSize='small' />
         </IconButton>
       </Tooltip>
-      <Tooltip title='Eliminar usuario'>
-        <IconButton
-          size='small'
-          onClick={() => onDelete(user)}
-          color='error'
-          aria-label='eliminar usuario'
-        >
-          <Delete fontSize='small' />
-        </IconButton>
-      </Tooltip>
+      {!isAdmin && (
+        <Tooltip title='Eliminar usuario'>
+          <IconButton
+            size='small'
+            onClick={() => onDelete(user)}
+            color='error'
+            aria-label='eliminar usuario'
+          >
+            <Delete fontSize='small' />
+          </IconButton>
+        </Tooltip>
+      )}
     </Box>
   );
 }
