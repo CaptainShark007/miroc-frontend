@@ -33,7 +33,7 @@ export default function CreateUserPage() {
   const onSubmit = (data: CreateUserFormData) => {
     createUserMutation.mutate(data, {
       onSuccess: () => {
-        navigate('/admin/users');
+        navigate(-1);
       },
     });
   };

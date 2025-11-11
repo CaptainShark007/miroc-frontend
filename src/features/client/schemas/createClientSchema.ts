@@ -5,7 +5,7 @@ export const createClientSchema = yup.object({
     .number()
     .typeError('El DNI debe ser un número válido')
     .required('El DNI es requerido')
-    .min(1000000, 'DNI debe tener al menos 7 dígitos')
+    .min(10000000, 'DNI debe tener al menos 8 dígitos')
     .max(99999999, 'DNI debe tener máximo 8 dígitos'),
   firstName: yup
     .string()

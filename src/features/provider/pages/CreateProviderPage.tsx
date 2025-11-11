@@ -33,7 +33,7 @@ export default function CreateProviderPage() {
   const onSubmit = async (data: CreateProviderFormData) => {
     try {
       await createProviderMutation.mutateAsync(data);
-      navigate('/entities/suppliers');
+      navigate(-1);
     } catch (error: any) {
       showToast(`Error al crear proveedor: ${error.message}`, 'error');
     }

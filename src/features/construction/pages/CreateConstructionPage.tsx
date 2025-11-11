@@ -37,14 +37,14 @@ export default function CreateConstructionPage() {
       },
       {
         onSuccess: () => {
-          navigate('/works');
+          navigate(-1);
         },
       }
     );
   };
 
   const handleBack = () => {
-    navigate('/works');
+    navigate(-1);
   };
 
   return (

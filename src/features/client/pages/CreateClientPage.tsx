@@ -33,7 +33,7 @@ export default function CreateClientPage() {
     createClientMutation.mutate(data, {
       onSuccess: () => {
         showToast('Cliente creado correctamente', 'success');
-        navigate('/entities/clients');
+        navigate(-1);
       },
       onError: (error: any) => {
         showToast(

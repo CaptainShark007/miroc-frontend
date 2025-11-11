@@ -60,7 +60,7 @@ export default function CreateConstructionFormFields({
         minSearchLength={0}
         debounceTime={300}
         createNewLabel='Crear nuevo cliente'
-        createNavigationPath='/admin/clients/create'
+        createNavigationPath='/entities/clients/create'
       />
     </>
   );

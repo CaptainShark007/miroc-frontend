@@ -31,7 +31,7 @@ export default function CreateEmployeePage() {
   const onSubmit = (data: CreateEmployeeFormData) => {
     createEmployeeMutation.mutate(data, {
       onSuccess: () => {
-        navigate('/entities/employees');
+        navigate(-1);
       },
     });
   };

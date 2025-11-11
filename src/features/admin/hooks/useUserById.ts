@@ -10,7 +10,9 @@ export const useUserById = (userDni: string | undefined) => {
     pageSize: 1000,
   });
 
-  const user = usersData?.data?.items?.find((u) => u.dni.toString() === userDni);
+  const user = usersData?.data?.items?.find(
+    (u) => u.dni.toString() === userDni
+  );
 
   return {
     user,
