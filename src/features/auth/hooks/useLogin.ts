@@ -23,7 +23,7 @@ export const useLogin = () => {
 
       showSuccess(res.message ?? '¡Inicio de sesión exitoso! Bienvenido.');
 
-      navigate('/movements');
+      navigate('/dashboard');
     },
     onError: (res) => {
       showError(res.error.message);
