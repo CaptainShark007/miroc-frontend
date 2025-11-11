@@ -77,7 +77,9 @@ export default function UserPermissionsModal({
   // Mantener los datos originales del backend para verificar permisos
   const originalRoles = rolesData?.data || [];
   const roles: UIRole[] = rolesData?.data
-    ? rolesData.data.map(convertAPIRoleToFrontend)
+    ? rolesData.data
+        .filter((role) => role.name.toUpperCase() !== 'ADMIN')
+        .map(convertAPIRoleToFrontend)
     : [];
 
   // Helper para verificar si un permiso existe en los datos originales del backend
